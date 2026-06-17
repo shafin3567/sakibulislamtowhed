@@ -6,10 +6,10 @@ let autoPlayInterval = null;
 
 // Product Images map
 const productImages = {
-  cakes: "images/hero_cake_1781682025087.png",
-  hampers: "images/gift_hamper_1781682042798.png",
-  "return-gifts": "images/return_gifts_1781682058690.png",
-  trousseau: "images/trousseau_packing_1781682075779.png"
+  cakes: "images/hero/hero-cake.png",
+  hampers: "images/products/gift-hamper.png",
+  "return-gifts": "images/products/return-gifts.png",
+  trousseau: "images/products/trousseau-packing.png"
 };
 
 // Reviews list of Ludhiana
@@ -52,7 +52,7 @@ const reviews = [
 const galleryItems = [
   {
     id: "1",
-    src: "images/ig_strawberry_1781682095315.png",
+    src: "images/gallery/strawberry-cake.png",
     title: "Double Cream Strawberry Sponge Cake 🍓",
     category: "Cakes",
     likes: "128",
@@ -60,7 +60,7 @@ const galleryItems = [
   },
   {
     id: "2",
-    src: "images/gift_hamper_1781682042798.png",
+    src: "images/products/gift-hamper.png",
     title: "Luxurious Chocolate & Dry Fruit Hamper 🎁",
     category: "Hampers",
     likes: "245",
@@ -68,7 +68,7 @@ const galleryItems = [
   },
   {
     id: "3",
-    src: "images/ig_macarons_1781682111012.png",
+    src: "images/gallery/macarons.png",
     title: "Pastel French Macaron Collection Box 🌸",
     category: "Desserts",
     likes: "194",
@@ -76,7 +76,7 @@ const galleryItems = [
   },
   {
     id: "4",
-    src: "images/ig_birthday_cake_1781682127663.png",
+    src: "images/gallery/birthday-cake.png",
     title: "Magical Teddy Sleeping Under the Stars 🎂",
     category: "Custom Cakes",
     likes: "312",
@@ -84,7 +84,7 @@ const galleryItems = [
   },
   {
     id: "5",
-    src: "images/return_gifts_1781682058690.png",
+    src: "images/products/return-gifts.png",
     title: "Golden Floral Return favor boxes 🎀",
     category: "Return Gifts",
     likes: "156",
@@ -92,7 +92,7 @@ const galleryItems = [
   },
   {
     id: "6",
-    src: "images/trousseau_packing_1781682075779.png",
+    src: "images/products/trousseau-packing.png",
     title: "Ornate Bridesmaid Saree Packing Display 💝",
     category: "Trousseau Packing",
     likes: "284",
