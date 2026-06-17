@@ -1,6 +1,7 @@
 import { ArrowRight, MessageCircle, Heart, Star, Sparkles, Award } from "lucide-react";
 import { motion } from "motion/react";
 import { useLanguage } from "../context/LanguageContext";
+import heroImage from "../assets/images/hero_cake_1781682025087.jpg";
 
 interface HeroProps {
   onViewProducts: () => void;
@@ -8,7 +9,6 @@ interface HeroProps {
 }
 
 export default function Hero({ onViewProducts, onOpenOrderForm }: HeroProps) {
-  const heroImage = "/src/assets/images/hero_cake_1781682025087.jpg";
   const { t, isRtl } = useLanguage();
 
   return (

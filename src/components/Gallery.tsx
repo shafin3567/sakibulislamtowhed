@@ -4,6 +4,14 @@ import { motion, AnimatePresence } from "motion/react";
 import { GalleryItem } from "../types";
 import { useLanguage } from "../context/LanguageContext";
 
+import strawberryImage from "../assets/images/ig_strawberry_1781682095315.jpg";
+import giftHamperImage from "../assets/images/gift_hamper_1781682042798.jpg";
+import macaronImage from "../assets/images/ig_macarons_1781682111012.jpg";
+import birthdayCakeImage from "../assets/images/ig_birthday_cake_1781682127663.jpg";
+import returnGiftsImage from "../assets/images/return_gifts_1781682058690.jpg";
+import trousseauImage from "../assets/images/trousseau_packing_1781682075779.jpg";
+import heroCakeImage from "../assets/images/hero_cake_1781682025087.jpg";
+
 export default function Gallery() {
   const { t, isRtl } = useLanguage();
   const [activeImageIdx, setActiveImageIdx] = useState<number | null>(null);
@@ -12,7 +20,7 @@ export default function Gallery() {
   const galleryItems: GalleryItem[] = [
     {
       id: "1",
-      src: "/src/assets/images/ig_strawberry_1781682095315.jpg",
+      src: strawberryImage,
       title: "🍓 Double Cream Strawberry Sponge Cake",
       category: "Cakes",
       likes: "128",
@@ -20,7 +28,7 @@ export default function Gallery() {
     },
     {
       id: "2",
-      src: "/src/assets/images/gift_hamper_1781682042798.jpg",
+      src: giftHamperImage,
       title: "🎁 Luxurious Chocolate & Dry Fruit Hamper",
       category: "Hampers",
       likes: "245",
@@ -28,7 +36,7 @@ export default function Gallery() {
     },
     {
       id: "3",
-      src: "/src/assets/images/ig_macarons_1781682111012.jpg",
+      src: macaronImage,
       title: "🌸 Pastel French Macaron Collection Box",
       category: "Desserts",
       likes: "194",
@@ -36,7 +44,7 @@ export default function Gallery() {
     },
     {
       id: "4",
-      src: "/src/assets/images/ig_birthday_cake_1781682127663.jpg",
+      src: birthdayCakeImage,
       title: "🎂 Magical Teddy Sleeping Under the Stars",
       category: "Custom Cakes",
       likes: "312",
@@ -44,7 +52,7 @@ export default function Gallery() {
     },
     {
       id: "5",
-      src: "/src/assets/images/return_gifts_1781682058690.jpg",
+      src: returnGiftsImage,
       title: "🎀 Golden Floral Return favor boxes",
       category: "Return Gifts",
       likes: "156",
@@ -52,7 +60,7 @@ export default function Gallery() {
     },
     {
       id: "6",
-      src: "/src/assets/images/trousseau_packing_1781682075779.jpg",
+      src: trousseauImage,
       title: "💝 Ornate Bridesmaid Saree Packing Display",
       category: "Trousseau Packing",
       likes: "284",
@@ -101,7 +109,7 @@ export default function Gallery() {
               <div className="w-full h-full rounded-full bg-white p-1">
                 <div className="w-full h-full rounded-full bg-berry-100 flex items-center justify-center text-berry-600 relative overflow-hidden">
                   <img
-                    src="/src/assets/images/hero_cake_1781682025087.jpg"
+                    src={heroCakeImage}
                     alt="Home Baker's profile avatar"
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"

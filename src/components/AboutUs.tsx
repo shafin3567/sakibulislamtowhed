@@ -2,6 +2,11 @@ import { Heart, CheckCircle2, Award, Star } from "lucide-react";
 import { motion } from "motion/react";
 import { useLanguage } from "../context/LanguageContext";
 
+import strawberryImage from "../assets/images/ig_strawberry_1781682095315.jpg";
+import giftHamperImage from "../assets/images/gift_hamper_1781682042798.jpg";
+import returnGiftsImage from "../assets/images/return_gifts_1781682058690.jpg";
+import trousseauImage from "../assets/images/trousseau_packing_1781682075779.jpg";
+
 export default function AboutUs() {
   const { t } = useLanguage();
 
@@ -37,7 +42,7 @@ export default function AboutUs() {
               <div className="space-y-4">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden border-2 border-white shadow-md">
                   <img
-                    src="/src/assets/images/ig_strawberry_1781682095315.jpg"
+                    src={strawberryImage}
                     alt="Premium freshly decorated cakes"
                     className="w-full h-full object-cover hover:scale-105 transition duration-500"
                     referrerPolicy="no-referrer"
@@ -45,7 +50,7 @@ export default function AboutUs() {
                 </div>
                 <div className="aspect-square rounded-2xl overflow-hidden border-2 border-white shadow-md">
                   <img
-                    src="/src/assets/images/gift_hamper_1781682042798.jpg"
+                    src={giftHamperImage}
                     alt="Bakery gifts and hampers"
                     className="w-full h-full object-cover hover:scale-105 transition duration-500"
                     referrerPolicy="no-referrer"
@@ -55,7 +60,7 @@ export default function AboutUs() {
               <div className="space-y-4 pt-8">
                 <div className="aspect-square rounded-2xl overflow-hidden border-2 border-white shadow-md">
                   <img
-                    src="/src/assets/images/return_gifts_1781682058690.jpg"
+                    src={returnGiftsImage}
                     alt="Return Gift bags and boxes"
                     className="w-full h-full object-cover hover:scale-105 transition duration-500"
                     referrerPolicy="no-referrer"
@@ -63,7 +68,7 @@ export default function AboutUs() {
                 </div>
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden border-2 border-white shadow-md">
                   <img
-                    src="/src/assets/images/trousseau_packing_1781682075779.jpg"
+                    src={trousseauImage}
                     alt="Trousseau bridal packing trays"
                     className="w-full h-full object-cover hover:scale-105 transition duration-500"
                     referrerPolicy="no-referrer"

@@ -4,6 +4,11 @@ import { motion, AnimatePresence } from "motion/react";
 import { Product } from "../types";
 import { useLanguage } from "../context/LanguageContext";
 
+import heroCakeImage from "../assets/images/hero_cake_1781682025087.jpg";
+import giftHamperImage from "../assets/images/gift_hamper_1781682042798.jpg";
+import returnGiftsImage from "../assets/images/return_gifts_1781682058690.jpg";
+import trousseauImage from "../assets/images/trousseau_packing_1781682075779.jpg";
+
 interface ProductCatalogProps {
   onSelectCategoryForOrder: (category: string) => void;
 }
@@ -17,7 +22,7 @@ export default function ProductCatalog({ onSelectCategoryForOrder }: ProductCata
       id: "cakes",
       title: t("itemCustomCakesTitle"),
       icon: "Cake",
-      image: "/src/assets/images/hero_cake_1781682025087.jpg",
+      image: heroCakeImage,
       description: t("itemCustomCakesDesc"),
       bulletItems: [t("bulletEggless"), t("bulletCustomized"), t("bulletFresh")],
       subItems: [
@@ -30,7 +35,7 @@ export default function ProductCatalog({ onSelectCategoryForOrder }: ProductCata
       id: "hampers",
       title: t("itemGiftHampersTitle"),
       icon: "Gift",
-      image: "/src/assets/images/gift_hamper_1781682042798.jpg",
+      image: giftHamperImage,
       description: t("itemGiftHampersDesc"),
       bulletItems: [t("bulletWoodBasket"), t("bulletHandmades"), t("bulletBulkOptions")],
       subItems: [
@@ -43,7 +48,7 @@ export default function ProductCatalog({ onSelectCategoryForOrder }: ProductCata
       id: "return-gifts",
       title: t("itemReturnGiftsTitle"),
       icon: "Ribbon",
-      image: "/src/assets/images/return_gifts_1781682058690.jpg",
+      image: returnGiftsImage,
       description: t("itemReturnGiftsDesc"),
       bulletItems: [t("bulletLabels"), t("bulletChildSafe"), t("bulletBoxVariety")],
       subItems: [
@@ -56,7 +61,7 @@ export default function ProductCatalog({ onSelectCategoryForOrder }: ProductCata
       id: "trousseau",
       title: t("itemTrousseauTitle"),
       icon: "Heart",
-      image: "/src/assets/images/trousseau_packing_1781682075779.jpg",
+      image: trousseauImage,
       description: t("itemTrousseauDesc"),
       bulletItems: [t("bulletTrays"), t("bulletAcrylic"), t("bulletBridalMatch")],
       subItems: [
