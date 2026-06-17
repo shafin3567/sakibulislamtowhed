@@ -1,13 +1,1518 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Baker's - 100% Eggless Cakes, Hampers & Trousseau Packing in Ludhiana</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Baker's Ludhiana | Bespoke 100% Eggless Cakes & Premium Hampers</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Styling override -->
+  <link rel="stylesheet" href="./css/style.css">
 
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: {
+              50: '#fdfbf7',
+              100: '#fbf7ed',
+              150: '#f6eed7',
+              200: '#f2e5c1',
+              300: '#ead296',
+            },
+            cocoa: {
+              50: '#faf7f2',
+              100: '#f3ece5',
+              150: '#e8dbce',
+              200: '#d5bfa7',
+              400: '#ab8d70',
+              455: '#947558',
+              550: '#75583f',
+              600: '#5c4532',
+              700: '#4d3725',
+              800: '#3a2718',
+              900: '#27190d',
+              950: '#150d06',
+            },
+            berry: {
+              50: '#fdf2f4',
+              100: '#fbe4e8',
+              200: '#f6ccd4',
+              250: '#f1adba',
+              300: '#ea8396',
+              400: '#e24e6a',
+              500: '#c52848',
+              600: '#aa1a36',
+              750: '#761022',
+              950: '#3c030d',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            space: ['Space Grotesk', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-cream-50 text-cocoa-900 antialiased font-sans">
+
+  <!-- Main Body Wrapper to assist script.js dir changes -->
+  <div id="body-wrapper" class="font-sans text-left text-cocoa-900">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-berry-600 text-cream-50 py-2.5 px-4 text-center text-xs sm:text-sm font-semibold tracking-wide relative z-50">
+      <p id="announcement-bar-text" data-t="announcement">✨ 100% Eggless Cakes & Exclusive Premium Hampers in Ludhiana ✨</p>
+    </div>
+
+    <!-- MAIN STICKY HEADER -->
+    <header id="main-header" class="sticky top-0 w-full z-40 transition-all duration-300 py-5 bg-cream-50/90 backdrop-blur-md border-b border-cocoa-100 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          
+          <!-- BRAND LOGO GROUP -->
+          <a href="#home" class="flex items-center gap-3 group">
+            <div class="w-12 h-12 rounded-2xl bg-berry-500 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-305">
+              <i data-lucide="cake" class="w-6 h-6 stroke-[2.2]"></i>
+            </div>
+            <div class="flex flex-col text-left">
+              <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-cocoa-900 leading-none">Home Baker's</span>
+              <span class="font-mono text-[9px] uppercase tracking-widest text-berry-500 font-bold mt-1" data-t="logoSubtitle">LUDHIANA • ESTABLISHED QUALITY</span>
+            </div>
+          </a>
+
+          <!-- DESKTOP NAV LINKS -->
+          <nav class="hidden lg:flex items-center gap-7">
+            <a href="#home" class="nav-link text-sm font-semibold text-cocoa-700 hover:text-berry-500 transition-colors" data-t="navHome">Home</a>
+            <a href="#about" class="nav-link text-sm font-semibold text-cocoa-700 hover:text-berry-500 transition-colors" data-t="navAbout">About Us</a>
+            <a href="#products" class="nav-link text-sm font-semibold text-cocoa-700 hover:text-berry-500 transition-colors" data-t="navOfferings">Our Offerings</a>
+            <a href="#why-us" class="nav-link text-sm font-semibold text-cocoa-700 hover:text-berry-500 transition-colors" data-t="navWhyUs">Why Choose Us</a>
+            <a href="#gallery" class="nav-link text-sm font-semibold text-cocoa-700 hover:text-berry-500 transition-colors" data-t="navGallery">Gallery</a>
+            <a href="#testimonials" class="nav-link text-sm font-semibold text-cocoa-700 hover:text-berry-500 transition-colors" data-t="navReviews">Reviews</a>
+            <a href="#process" class="nav-link text-sm font-semibold text-cocoa-700 hover:text-berry-500 transition-colors" data-t="navProcess">Order Process</a>
+            <a href="#contact" class="nav-link text-sm font-semibold text-cocoa-700 hover:text-berry-500 transition-colors" data-t="navContact">Contact</a>
+          </nav>
+
+          <!-- DESKTOP ACTIONS & LANG SWITCHER -->
+          <div class="hidden lg:flex items-center gap-4">
+            
+            <!-- LANG DROPDOWN SELECTOR -->
+            <div class="relative">
+              <button id="lang-btn" class="px-3 py-2 bg-white rounded-xl border border-cocoa-100 flex items-center gap-2 text-xs font-bold text-cocoa-800 shadow-sm hover:bg-cream-100 transition-colors">
+                <i data-lucide="globe" class="w-4 h-4 text-berry-500"></i>
+                <span id="current-lang-label">🇬🇧 English</span>
+                <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-cocoa-400"></i>
+              </button>
+              
+              <!-- DROPDOWN OPTIONS -->
+              <div id="lang-dropdown" class="absolute right-0 mt-2 w-40 bg-white border border-cocoa-100 rounded-2xl shadow-xl py-2 hidden overflow-hidden z-55">
+                <button data-lang-select="en" class="w-full text-left px-4 py-2 text-xs font-semibold text-cocoa-800 hover:bg-berry-50 hover:text-berry-600 transition-colors flex items-center gap-2">
+                  <span>🇬🇧</span> English
+                </button>
+                <button data-lang-select="pa" class="w-full text-left px-4 py-2 text-xs font-semibold text-cocoa-800 hover:bg-berry-50 hover:text-berry-600 transition-colors flex items-center gap-2">
+                  <span>🌾</span> ਪੰਜਾਬੀ
+                </button>
+                <button data-lang-select="hi" class="w-full text-left px-4 py-2 text-xs font-semibold text-cocoa-800 hover:bg-berry-50 hover:text-berry-600 transition-colors flex items-center gap-2">
+                  <span>🌸</span> हिन्दी
+                </button>
+                <button data-lang-select="ur" class="w-full text-left px-4 py-2 text-xs font-semibold text-cocoa-800 hover:bg-berry-50 hover:text-berry-600 transition-colors flex items-center gap-2">
+                  <span>✍️</span> اردو
+                </button>
+              </div>
+            </div>
+
+            <!-- PRIMARY HEADER CALL ACTION -->
+            <a href="tel:+917009142146" class="px-4 py-2 bg-cocoa-800 hover:bg-cocoa-900 text-cream-50 font-semibold text-xs rounded-full shadow-sm hover:shadow-md transition-all flex items-center gap-1.5">
+              <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+              <span data-t="callUs">Call Us</span>
+            </a>
+          </div>
+
+          <!-- MOBILE MENU BUTTON & BURGER -->
+          <div class="flex items-center gap-2 lg:hidden">
+            <button id="mobile-menu-btn" class="p-2 bg-white rounded-xl border border-cocoa-100 flex items-center justify-center text-cocoa-800" aria-label="Open navigation drawer">
+              <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div id="mobile-drawer" class="fixed inset-0 bg-cocoa-900/60 backdrop-blur-sm z-50 flex justify-end hidden">
+      <div class="w-72 bg-white h-full shadow-2xl p-6 flex flex-col justify-between relative overflow-y-auto">
+        
+        <!-- DRAWER CLOSE BUTTON -->
+        <button id="close-mobile-drawer" class="absolute top-4 right-4 p-2 text-cocoa-400 hover:text-cocoa-700" aria-label="Close layout">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+
+        <!-- DRAWER LINKS -->
+        <div class="mt-12 space-y-5 text-left">
+          <div class="flex items-center gap-3 border-b border-cocoa-100 pb-4 mb-6">
+            <div class="w-9 h-9 rounded-xl bg-berry-500 flex items-center justify-center text-white">
+              <i data-lucide="cake" class="w-4 h-4"></i>
+            </div>
+            <span class="font-serif font-bold text-lg text-cocoa-900">Home Baker's</span>
+          </div>
+
+          <nav class="flex flex-col gap-4">
+            <a href="#home" class="nav-link text-base font-bold text-cocoa-800 hover:text-berry-500 transition-colors" data-t="navHome">Home</a>
+            <a href="#about" class="nav-link text-base font-bold text-cocoa-800 hover:text-berry-500 transition-colors" data-t="navAbout">About Us</a>
+            <a href="#products" class="nav-link text-base font-bold text-cocoa-800 hover:text-berry-500 transition-colors" data-t="navOfferings">Our Offerings</a>
+            <a href="#why-us" class="nav-link text-base font-bold text-cocoa-800 hover:text-berry-500 transition-colors" data-t="navWhyUs">Why Choose Us</a>
+            <a href="#gallery" class="nav-link text-base font-bold text-cocoa-800 hover:text-berry-500 transition-colors" data-t="navGallery">Gallery</a>
+            <a href="#testimonials" class="nav-link text-base font-bold text-cocoa-800 hover:text-berry-500 transition-colors" data-t="navReviews">Reviews</a>
+            <a href="#process" class="nav-link text-base font-bold text-cocoa-800 hover:text-berry-500 transition-colors" data-t="navProcess">Order Process</a>
+            <a href="#contact" class="nav-link text-base font-bold text-cocoa-800 hover:text-berry-500 transition-colors" data-t="navContact">Contact</a>
+          </nav>
+        </div>
+
+        <!-- DRAWER LANG OPTIONS & DETAILS -->
+        <div class="space-y-6 pt-8 border-t border-cocoa-100 text-left">
+          <div class="space-y-2">
+            <span class="text-xs font-mono uppercase tracking-wider text-cocoa-400 block font-bold">Select Language</span>
+            
+            <div class="grid grid-cols-2 gap-2 text-left">
+              <button data-lang-select-mobile="en" class="py-2.5 px-3 bg-cream-50 hover:bg-cream-100 rounded-xl text-xs font-semibold text-cocoa-800 flex items-center gap-1">
+                <span>🇬🇧</span> English
+              </button>
+              <button data-lang-select-mobile="pa" class="py-2.5 px-3 bg-cream-50 hover:bg-cream-100 rounded-xl text-xs font-semibold text-cocoa-800 flex items-center gap-1">
+                <span>🌾</span> ਪੰਜਾਬੀ
+              </button>
+              <button data-lang-select-mobile="hi" class="py-2.5 px-3 bg-cream-50 hover:bg-cream-100 rounded-xl text-xs font-semibold text-cocoa-800 flex items-center gap-1">
+                <span>🌸</span> हिन्दी
+              </button>
+              <button data-lang-select-mobile="ur" class="py-2.5 px-3 bg-cream-50 hover:bg-cream-100 rounded-xl text-xs font-semibold text-cocoa-800 flex items-center gap-1">
+                <span>✍️</span> اردو
+              </button>
+            </div>
+          </div>
+
+          <a href="tel:+917009142146" class="w-full py-3.5 bg-berry-500 text-cream-50 font-bold rounded-xl flex items-center justify-center gap-2 shadow-sm text-sm">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            <span data-t="callNow">Call Now</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-[90vh] flex items-center bg-cream-50 overflow-hidden pt-12 pb-20">
+      
+      <!-- Ornamental Background Glows -->
+      <div class="absolute top-[10%] left-[-5%] w-72 h-72 rounded-full bg-berry-100/45 blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-[10%] right-[-5%] w-96 h-96 rounded-full bg-cream-200/50 blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-left">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          <!-- LEFT CONTENT -->
+          <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
+            
+            <!-- Quality Badge -->
+            <div class="inline-flex items-center justify-start gap-2 self-start bg-berry-100 text-berry-600 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+              <i data-lucide="award" class="w-3.5 h-3.5 text-berry-500 fill-berry-200"></i>
+              <span data-t="heroBadge">👑 Ludhiana's Premier Bespoke Baker</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-cocoa-900 leading-[1.11]">
+              <span data-t="heroTitlePart1">Indulge in Luxe,</span> <br>
+              <span class="text-berry-500" data-t="heroTitlePart2">100% Eggless Creations</span>
+            </h1>
+
+            <!-- Subtitle description -->
+            <p class="font-sans text-base sm:text-lg lg:text-xl text-cocoa-600 max-w-xl leading-relaxed font-normal" data-t="heroSubtitle">
+              Handcrafted cakes, custom festival gift hampers, gorgeous return favors, and high-end trousseau wrapping styled to perfection right here in Ludhiana.
+            </p>
+
+            <!-- Quality USPs Quick Grid -->
+            <div class="grid grid-cols-3 gap-3 pt-2 text-center">
+              <div class="p-3 bg-white/70 backdrop-blur-sm rounded-xl border border-cocoa-100 flex flex-col items-center">
+                <span class="text-xl sm:text-2xl font-serif font-bold text-berry-500">100%</span>
+                <span class="text-[9px] sm:text-xs font-mono uppercase text-cocoa-455 tracking-wider font-semibold" data-t="aboutStatsEggless">105% Pure Eggless</span>
+              </div>
+              <div class="p-3 bg-white/70 backdrop-blur-sm rounded-xl border border-cocoa-100 flex flex-col items-center">
+                <span class="text-xl sm:text-2xl font-serif font-bold text-berry-500">Homemade</span>
+                <span class="text-[9px] sm:text-xs font-mono uppercase text-cocoa-455 tracking-wider font-semibold">Fresh Quality</span>
+              </div>
+              <div class="p-3 bg-white/70 backdrop-blur-sm rounded-xl border border-cocoa-100 flex flex-col items-center">
+                <span class="text-xl sm:text-2xl font-serif font-bold text-berry-500">Custom</span>
+                <span class="text-[9px] sm:text-xs font-mono uppercase text-cocoa-455 tracking-wider font-semibold">Bespoke Trims</span>
+              </div>
+            </div>
+
+            <!-- Secondary Actions -->
+            <div class="flex flex-col sm:flex-row items-center justify-start gap-4 pt-4">
+              <a href="https://wa.me/917009142146?text=Hi%20Home%20Bakers!%20I%20saw%2520your%2520website%20and%20want%20to%20order%20some%20delicious%20eggless%20cakes/hampers!" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 bg-berry-500 hover:bg-berry-600 text-cream-50 font-bold rounded-full flex items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all hover:scale-[1.03]">
+                <i data-lucide="message-circle" class="w-5 h-5 fill-current"></i>
+                <span data-t="waOrder">WhatsApp Order</span>
+              </a>
+
+              <a href="#products" class="w-full sm:w-auto px-8 py-4 bg-cream-100 hover:bg-cream-200 text-cocoa-800 font-bold border-2 border-cocoa-200 rounded-full flex items-center justify-center gap-2 transition-all hover:scale-[1.03]">
+                <span data-t="heroBtnExplore">Explore Our Offerings</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- RIGHT IMAGE COMPONENT -->
+          <div class="lg:col-span-5 relative w-full flex flex-col items-center">
+            <div class="relative w-full max-w-[450px] aspect-[4/3] sm:aspect-square overflow-hidden rounded-2xl border-4 border-white shadow-2xl">
+              <img src="./images/hero_cake_1781682025087.jpg" alt="Beautiful premium multi-tier celebration cake in Ludhiana" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-cocoa-900/40 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+            <!-- Floating Reviews Popup underneath -->
+            <div class="mt-4 w-full max-w-[450px] bg-white/95 backdrop-blur-md p-3.5 rounded-xl shadow-lg border border-cocoa-100/50 flex gap-3 items-start animate-bounce-slow">
+              <div class="w-10 h-10 rounded-full bg-berry-100 flex items-center justify-center shrink-0">
+                <i data-lucide="heart" class="w-5 h-5 text-berry-500 fill-berry-300"></i>
+              </div>
+              <div class="text-left">
+                <div class="flex gap-0.5 text-amber-500 mb-0.5">
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-current text-amber-400 stroke-amber-500"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-current text-amber-400 stroke-amber-500"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-current text-amber-400 stroke-amber-500"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-current text-amber-400 stroke-amber-500"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-current text-amber-400 stroke-amber-500"></i>
+                </div>
+                <p class="text-xs text-cocoa-800 italic font-medium leading-tight" data-t="heroRatingQuote">
+                  "Beautiful cake and amazing taste. Highlights of our party!"
+                </p>
+                <span class="text-[10px] font-mono text-cocoa-400 block mt-1 uppercase" data-t="heroRatingTitle">Ludhiana Local Family</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" class="py-24 bg-white relative text-left">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left side layout photo -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative w-full aspect-square overflow-hidden rounded-3xl border-4 border-cream-100 shadow-xl">
+              <img src="./images/ig_luxury_humpers_1781682156945.jpg" alt="Artisanal hampers and wooden boxes display in studio" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Trust ornament bubble overlay -->
+            <div class="absolute -bottom-6 -right-6 bg-berry-500 text-cream-55 px-5 py-4 rounded-2xl shadow-xl max-w-sm hidden sm:block border-2 border-white">
+              <p class="text-xs italic text-white" data-t="aboutQuote">"Loved the attention to details for my sister's wedding packing! Pure luxury."</p>
+              <span class="text-[9px] font-mono font-bold uppercase text-berry-200 block mt-1.5">— Simran G., Ludhiana</span>
+            </div>
+          </div>
+
+          <!-- Right core description text -->
+          <div class="lg:col-span-7 space-y-6">
+            <span class="text-xs font-mono uppercase tracking-widest text-berry-500 font-bold bg-berry-100 px-3 py-1 rounded-full inline-block" data-t="aboutBadge">
+              Our Heritage Story
+            </span>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-cocoa-900 leading-tight" data-t="aboutTitle">
+              Baking Love and Crafting Memories in Ludhiana
+            </h2>
+            <div class="w-16 h-1 bg-berry-400 rounded-full"></div>
+
+            <p class="text-sm sm:text-base text-cocoa-600 leading-relaxed font-normal" data-t="aboutText1">
+              From humble ovens to Ludhiana's top bespoke design service, our journey is rooted in absolute quality, 100% eggless purity, and custom premium aesthetics that elevate your special celebrations into fine-art memories.
+            </p>
+            
+            <p class="text-sm sm:text-base text-cocoa-600 leading-relaxed font-normal" data-t="aboutText2">
+              Every cake is custom-baked. Every gift hamper, return favor box, and trousseau tray is meticulously hand-decorated to match your theme, representing pure elegance and luxury.
+            </p>
+
+            <!-- Stats grid block -->
+            <div class="grid grid-cols-2 gap-4 pt-4">
+              <div class="p-4 bg-cream-50 rounded-2xl border border-cocoa-100">
+                <span class="font-serif text-3xl font-bold text-cocoa-900">8+</span>
+                <span class="text-xs font-mono uppercase tracking-wider text-cocoa-455 block mt-0.5" data-t="aboutStatsYears">Years Baking</span>
+              </div>
+              <div class="p-4 bg-cream-50 rounded-2xl border border-cocoa-100">
+                <span class="font-serif text-3xl font-bold text-cocoa-900">100%</span>
+                <span class="text-xs font-mono uppercase tracking-wider text-cocoa-455 block mt-0.5" data-t="aboutStatsEggless">100% Pure Eggless</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PRODUCT CATALOG SECTION -->
+    <section id="products" class="py-24 bg-cream-100 relative text-left">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-berry-500 font-bold bg-berry-100 px-3 py-1 rounded-full inline-block" data-t="catalogBadge">
+            Our Specialty Catalog
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-cocoa-900 leading-tight" data-t="catalogTitle">
+            Featured Offerings
+          </h2>
+          <div class="w-16 h-1 bg-berry-400 mx-auto rounded-full"></div>
+          <p class="font-sans text-sm sm:text-base text-cocoa-600 max-w-xl mx-auto font-normal text-center" data-t="catalogSubtitle">
+            Every creation is bespoke, 100% vegetarian (eggless), and designed with utmost aesthetic brilliance. Click any category to pre-load it into our custom inquiry builder.
+          </p>
+        </div>
+
+        <!-- ITEMS SPLIT CONTAINER (Vite components output recreated fully) -->
+        <div class="space-y-16">
+          
+          <!-- ITEM 1: CUSTOM CAKES -->
+          <div id="cake-catalog-item" class="bg-white rounded-3xl border border-cocoa-100 shadow-lg overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+            <div class="lg:col-span-5 relative min-h-[300px]">
+              <img src="./images/hero_cake_1781682025087.jpg" alt="Signature Cakes catalog item illustration" class="w-full h-full object-cover absolute inset-0">
+            </div>
+            <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex justify-between items-start gap-4">
+                  <h3 class="font-serif text-2xl sm:text-3xl font-bold text-cocoa-900" data-t="itemCustomCakesTitle">🎂 Custom Cakes</h3>
+                  <span class="px-3 py-1 bg-berry-100 text-berry-600 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest" data-t="catalogPremiumLudhiana">Ludhiana Service</span>
+                </div>
+                <p class="text-sm sm:text-base text-cocoa-600 leading-relaxed font-normal" data-t="itemCustomCakesDesc">
+                  Our signature 100% eggless cakes are baked fresh with premium ingredients, fluffy sponge layers, and delicious buttercreams custom styled for your party.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 font-semibold">
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletEggless">100% Eggless Certified</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletCustomized">Custom Customizations</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletFresh">Always Baked Fresh to Order</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Shared Actions Footer -->
+              <div class="border-t border-cocoa-101 pt-6 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <button onclick="selectOfferCategory('itemCustomCakesTitle')" class="w-full sm:w-auto px-6 py-3.5 bg-berry-500 hover:bg-berry-600 text-cream-50 font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-2 shadow-sm hover:scale-[1.01]">
+                  <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                  <span data-t="catalogCustomizeBtn">Customize & Place Inquiry</span>
+                </button>
+
+                <!-- Sharing anchors -->
+                <div class="flex items-center gap-2 select-none w-full sm:w-auto justify-end">
+                  <span class="text-xs text-cocoa-400" data-t="catalogShareTitle">Share this catalog item:</span>
+                  <button data-copy-id="cake-catalog-item" class="p-2.5 bg-cream-50 hover:bg-cream-100 rounded-xl border border-cocoa-100 text-cocoa-700 hover:text-cocoa-900 flex items-center gap-1 text-xs font-semibold">
+                    <i data-lucide="link" class="w-3.5 h-3.5"></i>
+                    <span data-t="catalogShareCopyBtn">Copy Link</span>
+                  </button>
+                  <a href="https://wa.me/?text=Check%252520out%25252520this%25252520amazing%2520100%2525%2520Eggless%2520Cake%2520Catalog:%2520https://homebakersguide.com#cake-catalog-item" target="_blank" class="p-2.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-150 text-emerald-700 hover:text-emerald-900 rounded-xl flex items-center gap-1 text-xs font-semibold">
+                    <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                    <span data-t="catalogShareWaBtn">Share</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ITEM 2: GIFT HAMPERS -->
+          <div id="hamper-catalog-item" class="bg-white rounded-3xl border border-cocoa-101 shadow-lg overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+            <div class="lg:col-span-5 relative min-h-[300px]">
+              <img src="./images/gift_hamper_1781682042798.jpg" alt="Bespoke hampers box items visual illustration" class="w-full h-full object-cover absolute inset-0">
+            </div>
+            <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex justify-between items-start gap-4">
+                  <h3 class="font-serif text-2xl sm:text-3xl font-bold text-cocoa-900" data-t="itemGiftHampersTitle">🎁 Gift Hampers</h3>
+                  <span class="px-3 py-1 bg-berry-100 text-berry-600 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest" data-t="catalogPremiumLudhiana">Ludhiana Service</span>
+                </div>
+                <p class="text-sm sm:text-base text-cocoa-600 leading-relaxed font-normal" data-t="itemGiftHampersDesc">
+                  Gift an experience! Beautifully arranged baskets populated with handcrafted cookies, sweet bites, themed prints, and premium floral accents.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 font-semibold">
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletWoodBasket">Premium Wood/Velvet Baskets</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletHandmades">Handmades Only</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletBulkOptions">Bulk Options for Teams/Festivals</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Shared Actions Footer -->
+              <div class="border-t border-cocoa-101 pt-6 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <button onclick="selectOfferCategory('itemGiftHampersTitle')" class="w-full sm:w-auto px-6 py-3.5 bg-berry-500 hover:bg-berry-600 text-cream-50 font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-2 shadow-sm hover:scale-[1.01]">
+                  <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                  <span data-t="catalogCustomizeBtn">Customize & Place Inquiry</span>
+                </button>
+
+                <!-- Sharing anchors -->
+                <div class="flex items-center gap-2 select-none w-full sm:w-auto justify-end">
+                  <span class="text-xs text-cocoa-400" data-t="catalogShareTitle">Share this catalog item:</span>
+                  <button data-copy-id="hamper-catalog-item" class="p-2.5 bg-cream-50 hover:bg-cream-100 rounded-xl border border-cocoa-100 text-cocoa-700 hover:text-cocoa-900 flex items-center gap-1 text-xs font-semibold">
+                    <i data-lucide="link" class="w-3.5 h-3.5"></i>
+                    <span data-t="catalogShareCopyBtn">Copy Link</span>
+                  </button>
+                  <a href="https://wa.me/?text=Check%252520out%25252520this%25252520amazing%2520Gift%2520Hamper%2520Catalog:%2520https://homebakersguide.com#hamper-catalog-item" target="_blank" class="p-2.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-150 text-emerald-700 hover:text-emerald-900 rounded-xl flex items-center gap-1 text-xs font-semibold">
+                    <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                    <span data-t="catalogShareWaBtn">Share</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ITEM 3: RETURN GIFTS -->
+          <div id="return-gifts-catalog-item" class="bg-white rounded-3xl border border-cocoa-101 shadow-lg overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+            <div class="lg:col-span-5 relative min-h-[300px]">
+              <img src="./images/return_gifts_1781682058690.jpg" alt="Return Gifts customized boxes illustration" class="w-full h-full object-cover absolute inset-0">
+            </div>
+            <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex justify-between items-start gap-4">
+                  <h3 class="font-serif text-2xl sm:text-3xl font-bold text-cocoa-900" data-t="itemReturnGiftsTitle">🎀 Return Gifts</h3>
+                  <span class="px-3 py-1 bg-berry-100 text-berry-600 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest" data-t="catalogPremiumLudhiana">Ludhiana Service</span>
+                </div>
+                <p class="text-sm sm:text-base text-cocoa-600 leading-relaxed font-normal" data-t="itemReturnGiftsDesc">
+                  Delight your party guests on departure. From child birthdays to high-end baby showers, we build souvenirs that symbolize warm remembrance.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 font-semibold">
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletLabels">Personalized Custom Labels</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletChildSafe">Child-Safe & Food-Safe Items</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletBoxVariety">Variety of Boxes/Sacks available</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Shared Actions Footer -->
+              <div class="border-t border-cocoa-101 pt-6 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <button onclick="selectOfferCategory('itemReturnGiftsTitle')" class="w-full sm:w-auto px-6 py-3.5 bg-berry-500 hover:bg-berry-600 text-cream-50 font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-2 shadow-sm hover:scale-[1.01]">
+                  <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                  <span data-t="catalogCustomizeBtn">Customize & Place Inquiry</span>
+                </button>
+
+                <!-- Sharing anchors -->
+                <div class="flex items-center gap-2 select-none w-full sm:w-auto justify-end">
+                  <span class="text-xs text-cocoa-400" data-t="catalogShareTitle">Share this catalog item:</span>
+                  <button data-copy-id="return-gifts-catalog-item" class="p-2.5 bg-cream-50 hover:bg-cream-100 rounded-xl border border-cocoa-100 text-cocoa-700 hover:text-cocoa-900 flex items-center gap-1 text-xs font-semibold">
+                    <i data-lucide="link" class="w-3.5 h-3.5"></i>
+                    <span data-t="catalogShareCopyBtn">Copy Link</span>
+                  </button>
+                  <a href="https://wa.me/?text=Check%252520out%25252520this%25252520amazing%2520Return%2520Gifts%2520Catalog:%2520https://homebakersguide.com#return-gifts-catalog-item" target="_blank" class="p-2.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-150 text-emerald-700 hover:text-emerald-950 rounded-xl flex items-center gap-1 text-xs font-semibold">
+                    <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                    <span data-t="catalogShareWaBtn">Share</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ITEM 4: TROUSSEAU PACKING -->
+          <div id="trousseau-catalog-item" class="bg-white rounded-3xl border border-cocoa-101 shadow-lg overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+            <div class="lg:col-span-5 relative min-h-[300px]">
+              <img src="./images/trousseau_packing_1781682075779.jpg" alt="Trousseau Packing tray decoration items visual" class="w-full h-full object-cover absolute inset-0">
+            </div>
+            <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex justify-between items-start gap-4">
+                  <h3 class="font-serif text-2xl sm:text-3xl font-bold text-cocoa-900" data-t="itemTrousseauTitle">💝 Trousseau Packing</h3>
+                  <span class="px-3 py-1 bg-berry-100 text-berry-600 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest" data-t="catalogPremiumLudhiana">Ludhiana Service</span>
+                </div>
+                <p class="text-sm sm:text-base text-cocoa-600 leading-relaxed font-normal" data-t="itemTrousseauTitleDesc">
+                  Let your wedding gifts reflect ultimate elegance. Our premium trousseau wrapping turns sarees, jewelry, and favors into masterpiece displays.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 font-semibold">
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletTrays">Suede/Velvet Trays</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletAcrylic">Acrylic/Floral Decorative Top Covers</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-xs text-cocoa-700">
+                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span data-t="bulletBridalMatch">Color-coordinated layouts matching bridal lehengas</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Shared Actions Footer -->
+              <div class="border-t border-cocoa-101 pt-6 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <button onclick="selectOfferCategory('itemTrousseauTitle')" class="w-full sm:w-auto px-6 py-3.5 bg-berry-500 hover:bg-berry-600 text-cream-50 font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-2 shadow-sm hover:scale-[1.01]">
+                  <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                  <span data-t="catalogCustomizeBtn">Customize & Place Inquiry</span>
+                </button>
+
+                <!-- Sharing anchors -->
+                <div class="flex items-center gap-2 select-none w-full sm:w-auto justify-end">
+                  <span class="text-xs text-cocoa-400" data-t="catalogShareTitle">Share this catalog item:</span>
+                  <button data-copy-id="trousseau-catalog-item" class="p-2.5 bg-cream-50 hover:bg-cream-100 rounded-xl border border-cocoa-100 text-cocoa-700 hover:text-cocoa-900 flex items-center gap-1 text-xs font-semibold">
+                    <i data-lucide="link" class="w-3.5 h-3.5"></i>
+                    <span data-t="catalogShareCopyBtn">Copy Link</span>
+                  </button>
+                  <a href="https://wa.me/?text=Check%252520out%25252520this%25252520amazing%2520Trousseau%2520Packing%2520Catalog:%2520https://homebakersguide.com#trousseau-catalog-item" target="_blank" class="p-2.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-150 text-emerald-700 hover:text-emerald-900 rounded-xl flex items-center gap-1 text-xs font-semibold">
+                    <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                    <span data-t="catalogShareWaBtn">Share</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section id="why-us" class="py-24 bg-white relative text-left">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Headers -->
+        <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-berry-500 font-bold bg-berry-100 px-3 py-1 rounded-full inline-block" data-t="whyBadge">
+            The Art of Perfection
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-cocoa-900 leading-tight" data-t="whyTitle">
+            Why Connoisseurs Choose Us
+          </h2>
+          <div class="w-16 h-1 bg-berry-400 mx-auto rounded-full"></div>
+          <p class="font-sans text-sm sm:text-base text-cocoa-600 max-w-xl mx-auto font-normal text-center" data-t="whySubtitle">
+            We do not just bake or pack; we sculpt aesthetic experiences. Here is why the most refined families in Ludhiana choose our workshop.
+          </p>
+        </div>
+
+        <!-- Grid of value boxes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Box 1 -->
+          <div class="p-8 rounded-3xl bg-cream-50 border border-cocoa-100 flex gap-5 items-start">
+            <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-600 shrink-0 shadow-sm">
+              <i data-lucide="check" class="w-6 h-6 stroke-[2.5]"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-serif text-xl font-bold text-cocoa-900" data-t="whyCard1Title">100% Pure Vegetarian</h3>
+              <p class="text-sm text-cocoa-600 leading-relaxed font-normal" data-t="whyCard1Desc">
+                Completely certified eggless facility ensuring kitchen-pure compliance with traditional family standards.
+              </p>
+            </div>
+          </div>
+
+          <!-- Box 2 -->
+          <div class="p-8 rounded-3xl bg-cream-50 border border-cocoa-100 flex gap-5 items-start">
+            <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-600 shrink-0 shadow-sm">
+              <i data-lucide="sparkles" class="w-6 h-6 stroke-[2.5]"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-serif text-xl font-bold text-cocoa-900" data-t="whyCard2Title">Bespoke Design Story</h3>
+              <p class="text-sm text-cocoa-600 leading-relaxed font-normal" data-t="whyCard2Desc">
+                No template lookalikes. We design everything explicitly around your color palettes, outfits, or custom themes.
+              </p>
+            </div>
+          </div>
+
+          <!-- Box 3 -->
+          <div class="p-8 rounded-3xl bg-cream-50 border border-cocoa-100 flex gap-5 items-start">
+            <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-600 shrink-0 shadow-sm">
+              <i data-lucide="award" class="w-6 h-6 stroke-[2.5]"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-serif text-xl font-bold text-cocoa-900" data-t="whyCard3Title">Premium Ingredients</h3>
+              <p class="text-sm text-cocoa-600 leading-relaxed font-normal" data-t="whyCard3Desc">
+                Pure Belgian chocolates, fresh vanilla bean pods, rich dairy creams and no artificial shortcuts.
+              </p>
+            </div>
+          </div>
+
+          <!-- Box 4 -->
+          <div class="p-8 rounded-3xl bg-cream-50 border border-cocoa-101 flex gap-5 items-start">
+            <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-600 shrink-0 shadow-sm">
+              <i data-lucide="heart" class="w-6 h-6 stroke-[2.5]"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-serif text-xl font-bold text-cocoa-900" data-t="whyCard4Title">Elegant Artistry</h3>
+              <p class="text-sm text-cocoa-600 leading-relaxed font-normal" data-t="whyCard4Desc">
+                From luxury velvet hampers to acrylic-topped lace-lined trousseau trays, our setups represent custom royalty.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LIVE LOOKBOOK GALLERY -->
+    <section id="gallery" class="py-24 bg-cream-50 relative text-left">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="max-w-3xl mx-auto text-center mb-12 space-y-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-berry-500 font-bold bg-berry-100 px-3 py-1 rounded-full inline-block" data-t="galleryBadge">
+            Live Instagram Lookbook
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-cocoa-900 leading-tight" data-t="galleryTitle">
+            Our Visual Diary
+          </h2>
+          <div class="w-16 h-1 bg-berry-400 mx-auto rounded-full"></div>
+          <p class="font-sans text-sm sm:text-base text-cocoa-600 max-w-xl mx-auto font-normal text-center" data-t="gallerySubtitle">
+            Witness the exquisite creations leaving our kitchen or studio. Check our fresh updates and real-time celebratory posts right from Ludhiana.
+          </p>
+        </div>
+
+        <!-- Simulated Instagram Profile Header -->
+        <div class="max-w-3xl mx-auto bg-white border border-cocoa-100 rounded-3xl p-6 sm:p-8 shadow-sm mb-16 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-berry-50 rounded-full blur-2xl"></div>
+          
+          <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start relative z-10 text-center sm:text-left">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600">
+              <div class="w-full h-full rounded-full bg-white p-1">
+                <div class="w-full h-full rounded-full bg-berry-100 overflow-hidden relative">
+                  <img src="./images/hero_cake_1781682025087.jpg" alt="Home bakers profile photo avatar" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Details stats -->
+            <div class="space-y-4 flex-1">
+              <div class="flex flex-col sm:flex-row sm:items-center gap-3 justify-center sm:justify-start">
+                <h4 class="font-serif text-2xl font-bold text-cocoa-900">@HomeBakersLudhiana</h4>
+                <a href="https://wa.me/917009142146" target="_blank" class="px-5 py-1.5 bg-berry-500 hover:bg-berry-600 font-semibold text-xs text-white rounded-full flex items-center justify-center gap-1 self-center sm:self-start">
+                  <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
+                  <span>Follow Us</span>
+                </a>
+              </div>
+
+              <!-- Stats counters -->
+              <div class="flex justify-center sm:justify-start gap-8 font-mono text-sm leading-none border-y border-cocoa-100 py-3">
+                <div>
+                  <span class="font-bold text-cocoa-900 block text-lg">248</span>
+                  <span class="text-xs text-cocoa-400">creations</span>
+                </div>
+                <div>
+                  <span class="font-bold text-cocoa-900 block text-lg">8.4K</span>
+                  <span class="text-xs text-cocoa-400">followers</span>
+                </div>
+                <div>
+                  <span class="font-bold text-cocoa-900 block text-lg">152</span>
+                  <span class="text-xs text-cocoa-400">collabs</span>
+                </div>
+              </div>
+
+              <!-- Location address and tags -->
+              <div class="text-xs space-y-1.5 text-cocoa-605">
+                <div class="flex items-center gap-1 justify-center sm:justify-start">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5 text-berry-500"></i>
+                  <span class="font-semibold">Model Town, Ludhiana, Punjab</span>
+                </div>
+                <p class="italic text-cocoa-450 leading-relaxed leading-snug">
+                  🌸 Elegant cakes & customized hampers for Ludhiana's finest landmark events • 100% Homemade Pure Eggless kitchen
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHOTO GRID DISPLAY -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- IMAGE 1 -->
+          <div data-gallery-idx="0" class="gallery-card relative aspect-square bg-cocoa-100 rounded-3xl border border-cocoa-100 overflow-hidden group shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all cursor-zoom-in">
+            <img src="./images/ig_strawberry_1781682095315.jpg" alt="Double Cream Strawberry Sponge Cake" class="w-full h-full object-cover">
+            <!-- Overlay likes comments -->
+            <div class="gallery-overlay absolute inset-0 bg-cocoa-900/60 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300">
+              <div class="flex items-center gap-6 text-cream-50 font-mono text-sm font-bold">
+                <span class="flex items-center gap-1.5"><i data-lucide="heart" class="w-5 h-5 fill-current"></i> 128</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="message-circle" class="w-5 h-5 fill-current"></i> 14</span>
+              </div>
+              <p class="text-xs text-cream-200 mt-3 px-6 text-center font-serif italic">Double Cream Strawberry Sponge Cake</p>
+            </div>
+          </div>
+
+          <!-- IMAGE 2 -->
+          <div data-gallery-idx="1" class="gallery-card relative aspect-square bg-cocoa-100 rounded-3xl border border-cocoa-100 overflow-hidden group shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all cursor-zoom-in">
+            <img src="./images/gift_hamper_1781682042798.jpg" alt="Luxurious Chocolate & Dry Fruit Hamper" class="w-full h-full object-cover">
+            <!-- Overlay -->
+            <div class="gallery-overlay absolute inset-0 bg-cocoa-900/60 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300">
+              <div class="flex items-center gap-6 text-cream-50 font-mono text-sm font-bold">
+                <span class="flex items-center gap-1.5"><i data-lucide="heart" class="w-5 h-5 fill-current"></i> 245</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="message-circle" class="w-5 h-5 fill-current"></i> 32</span>
+              </div>
+              <p class="text-xs text-cream-200 mt-3 px-6 text-center font-serif italic">Luxurious Chocolate & Dry Fruit Hamper</p>
+            </div>
+          </div>
+
+          <!-- IMAGE 3 -->
+          <div data-gallery-idx="2" class="gallery-card relative aspect-square bg-cocoa-100 rounded-3xl border border-cocoa-100 overflow-hidden group shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all cursor-zoom-in">
+            <img src="./images/ig_macarons_1781682111012.jpg" alt="Pastel French Macaron Collection Box" class="w-full h-full object-cover">
+            <!-- Overlay -->
+            <div class="gallery-overlay absolute inset-0 bg-cocoa-900/60 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300">
+              <div class="flex items-center gap-6 text-cream-50 font-mono text-sm font-bold">
+                <span class="flex items-center gap-1.5"><i data-lucide="heart" class="w-5 h-5 fill-current"></i> 194</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="message-circle" class="w-5 h-5 fill-current"></i> 21</span>
+              </div>
+              <p class="text-xs text-cream-200 mt-3 px-6 text-center font-serif italic">Pastel French Macaron Collection Box</p>
+            </div>
+          </div>
+
+          <!-- IMAGE 4 -->
+          <div data-gallery-idx="3" class="gallery-card relative aspect-square bg-cocoa-100 rounded-3xl border border-cocoa-100 overflow-hidden group shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all cursor-zoom-in">
+            <img src="./images/ig_birthday_cake_1781682127663.jpg" alt="Magical Teddy Sleeping Under the Stars" class="w-full h-full object-cover">
+            <!-- Overlay -->
+            <div class="gallery-overlay absolute inset-0 bg-cocoa-900/60 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300">
+              <div class="flex items-center gap-6 text-cream-50 font-mono text-sm font-bold">
+                <span class="flex items-center gap-1.5"><i data-lucide="heart" class="w-5 h-5 fill-current"></i> 312</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="message-circle" class="w-5 h-5 fill-current"></i> 45</span>
+              </div>
+              <p class="text-xs text-cream-200 mt-3 px-6 text-center font-serif italic">Magical Teddy Sleeping Under the Stars</p>
+            </div>
+          </div>
+
+          <!-- IMAGE 5 -->
+          <div data-gallery-idx="4" class="gallery-card relative aspect-square bg-cocoa-100 rounded-3xl border border-cocoa-100 overflow-hidden group shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all cursor-zoom-in">
+            <img src="./images/return_gifts_1781682058690.jpg" alt="Golden Floral Return favor boxes" class="w-full h-full object-cover">
+            <!-- Overlay -->
+            <div class="gallery-overlay absolute inset-0 bg-cocoa-900/60 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300">
+              <div class="flex items-center gap-6 text-cream-50 font-mono text-sm font-bold">
+                <span class="flex items-center gap-1.5"><i data-lucide="heart" class="w-5 h-5 fill-current"></i> 156</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="message-circle" class="w-5 h-5 fill-current"></i> 18</span>
+              </div>
+              <p class="text-xs text-cream-200 mt-3 px-6 text-center font-serif italic">Golden Floral Return favor boxes</p>
+            </div>
+          </div>
+
+          <!-- IMAGE 6 -->
+          <div data-gallery-idx="5" class="gallery-card relative aspect-square bg-cocoa-100 rounded-3xl border border-cocoa-100 overflow-hidden group shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all cursor-zoom-in">
+            <img src="./images/trousseau_packing_1781682075779.jpg" alt="Ornate Bridesmaid Saree Packing Display" class="w-full h-full object-cover">
+            <!-- Overlay -->
+            <div class="gallery-overlay absolute inset-0 bg-cocoa-900/60 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300">
+              <div class="flex items-center gap-6 text-cream-50 font-mono text-sm font-bold">
+                <span class="flex items-center gap-1.5"><i data-lucide="heart" class="w-5 h-5 fill-current"></i> 284</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="message-circle" class="w-5 h-5 fill-current"></i> 39</span>
+              </div>
+              <p class="text-xs text-cream-200 mt-3 px-6 text-center font-serif italic">Ornate Bridesmaid Saree Packing Display</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PHOTO GALLERY LIGHTBOX OVERLAY (z-index 100 absolute focus container) -->
+    <div id="lightbox-overlay" class="fixed inset-0 bg-cocoa-950/95 z-[100] flex-col items-center justify-center p-4 hidden transition-opacity duration-350 select-none">
+      
+      <!-- Box layout header -->
+      <div class="w-full max-w-4xl flex items-center justify-between text-cream-50 mb-3 relative">
+        <div class="flex flex-col text-left">
+          <span id="lightbox-category" class="text-xs font-mono uppercase tracking-widest text-berry-300 font-bold">Category</span>
+          <h4 id="lightbox-title" class="font-serif text-lg sm:text-xl font-semibold mt-0.5">Title</h4>
+        </div>
+        <div class="flex items-center gap-4">
+          <span id="lightbox-index" class="font-mono text-xs text-cocoa-300 font-bold">1 of 6</span>
+          <button id="lightbox-close" class="p-2 hover:bg-white/10 rounded-full text-cream-50 transition-colors focus:outline-none cursor-pointer" aria-label="Dismiss lookbook">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main center photo with controls -->
+      <div class="w-full max-w-4xl flex items-center justify-between gap-2 sm:gap-6 relative">
+        
+        <!-- Previous Arrow button -->
+        <button id="lightbox-prev" class="p-3 bg-white/5 hover:bg-white/10 rounded-full text-cream-50 transition-colors focus:outline-none shrink-0" aria-label="Back button">
+          <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+
+        <!-- Canvas Stage image content wrapper -->
+        <div class="flex-1 max-h-[70vh] flex items-center justify-center overflow-hidden rounded-2xl border-2 border-white/10 bg-cocoa-900 shadow-2xl relative">
+          <img id="lightbox-img" src="" alt="Active lightbox lookbook zoom" class="max-w-full max-h-[65vh] object-contain block select-none">
+        </div>
+
+        <!-- Next Arrow button -->
+        <button id="lightbox-next" class="p-3 bg-white/5 hover:bg-white/10 rounded-full text-cream-50 transition-colors focus:outline-none shrink-0" aria-label="Next button">
+          <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+      </div>
+
+      <!-- WhatsApp Inquiry Button on Gallery Item -->
+      <div class="w-full max-w-4xl text-center mt-5">
+        <a id="lightbox-inquire-btn" href="" target="_blank" class="inline-flex items-center gap-2 px-6 py-3.5 bg-berry-500 hover:bg-berry-600 text-cream-50 font-semibold text-xs rounded-full shadow-md transition-all hover:scale-[1.02]">
+          <i data-lucide="message-circle" class="w-4 h-4 fill-current"></i>
+          <span>Inquire About This Bespoke Design</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- TESTIMONIALS REVIEWS SLIDER -->
+    <section id="testimonials" class="py-24 bg-white relative text-left">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-berry-500 font-bold bg-berry-100 px-3 py-1 rounded-full inline-block" data-t="testimonialsBadge">
+            Word of Mouth
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-cocoa-900 leading-tight" data-t="testimonialsTitle">
+            In Love With Our Sweet Delights
+          </h2>
+          <div class="w-16 h-1 bg-berry-400 mx-auto rounded-full"></div>
+          <p class="font-sans text-sm sm:text-base text-cocoa-600 max-w-xl mx-auto font-normal text-center" data-t="testimonialsSubtitle">
+            Read reviews from families and corporate partners across Ludhiana who trust us for their most joyous lifetime landmarks.
+          </p>
+        </div>
+
+        <!-- SLIDER STAGE CARD CONTAINER -->
+        <div class="max-w-4xl mx-auto relative px-4">
+          
+          <div class="bg-cream-50 p-8 sm:p-14 rounded-[32px] border border-cocoa-100 shadow-xl relative text-center">
+            
+            <!-- Red/Pink Quote Symbol Backdrop -->
+            <div class="absolute top-6 left-8 font-serif text-8xl text-berry-100/50 pointer-events-none select-none">“</div>
+            
+            <!-- Ratings and description text toggles -->
+            <div class="space-y-6 relative z-10">
+              
+              <!-- Stars -->
+              <div id="review-rating" class="flex gap-1 justify-center text-amber-400">
+                <!-- Injected via script -->
+              </div>
+
+              <!-- Quote Content -->
+              <p id="review-text" class="font-serif text-lg sm:text-2xl text-cocoa-800 italic leading-relaxed font-semibold">
+                "Beautiful cake and amazing taste. Made my daughters birthday completely memorable!"
+              </p>
+
+              <!-- Line decorator -->
+              <div class="w-10 h-0.5 bg-cocoa-150 mx-auto rounded-full"></div>
+
+              <!-- Customer names locations and dates -->
+              <div class="space-y-1">
+                <h4 id="review-name" class="font-serif text-lg font-bold text-cocoa-900">Priya Sharma</h4>
+                <div class="flex items-center justify-center gap-2 text-xs font-mono text-cocoa-400 uppercase tracking-widest font-bold">
+                  <span id="review-location">BRS Nagar, Ludhiana</span>
+                  <span>•</span>
+                  <span id="review-date">2 weeks ago</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- SLIDER DOTS AND NAVIGATION CONTROLS ARROW BUTTONS -->
+          <div class="mt-8 flex justify-between items-center max-w-[280px] mx-auto">
+            
+            <button id="review-prev-btn" class="p-2.5 bg-white border border-cocoa-100 rounded-full text-cocoa-700 hover:text-berry-500 shadow-sm hover:scale-105 active:scale-95 transition-all focus:outline-none" aria-label="Previous review hover action">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+
+            <!-- Line Dots -->
+            <div id="review-dots" class="flex items-center gap-2.5">
+              <!-- Inline injectors -->
+            </div>
+
+            <button id="review-next-btn" class="p-2.5 bg-white border border-cocoa-100 rounded-full text-cocoa-700 hover:text-berry-500 shadow-sm hover:scale-105 active:scale-95 transition-all focus:outline-none" aria-label="Next review hover action">
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TIMELINE ORDER PROCESS -->
+    <section id="process" class="py-24 bg-cream-50 relative overflow-hidden text-left">
+      <div class="absolute top-0 right-10 w-96 h-96 bg-berry-50/40 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Title -->
+        <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-berry-500 font-bold bg-berry-100 px-3 py-1 rounded-full inline-block" data-t="processBadge">
+            How It Works
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-cocoa-900 leading-tight" data-t="processTitle">
+            Our Ordering Experience
+          </h2>
+          <div class="w-16 h-1 bg-berry-400 mx-auto rounded-full"></div>
+          <p class="font-sans text-sm sm:text-base text-cocoa-600 max-w-xl mx-auto font-normal text-center" data-t="processSubtitle">
+            Getting your dream eggless creation or premium packaging is designed to be completely flawless, highly detailed, and transparent.
+          </p>
+        </div>
+
+        <!-- Workflow cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+          
+          <!-- H-Line connectors visual desk -->
+          <div class="hidden lg:block absolute top-[44px] left-[15%] right-[15%] h-0.5 bg-cocoa-100 z-0"></div>
+
+          <!-- Step 1 -->
+          <div class="bg-white border border-cocoa-100 p-8 rounded-3xl relative z-10 group shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+            <div class="space-y-6">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-600 shadow-inner group-hover:scale-110 transition duration-300">
+                  <i data-lucide="shopping-bag" class="w-5 h-5 text-berry-600"></i>
+                </div>
+                <span class="font-mono text-2xl font-bold text-cocoa-200 group-hover:text-berry-300 transition duration-300">01</span>
+              </div>
+              <h3 class="font-serif text-lg sm:text-xl font-bold text-cocoa-900 leading-snug" data-t="processStep1Title">Select & Share Detail</h3>
+              <p class="text-sm text-cocoa-600 leading-relaxed font-normal" data-t="processStep1Desc">
+                Pick your category and customized specifications. Click submit to send it as a dedicated inquiry.
+              </p>
+            </div>
+            <div class="mt-6 flex items-center gap-1.5 text-xs font-semibold text-berry-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span>Configure details</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-white border border-cocoa-100 p-8 rounded-3xl relative z-10 group shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+            <div class="space-y-6">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-600 shadow-inner group-hover:scale-110 transition duration-300">
+                  <i data-lucide="file-text" class="w-5 h-5 text-berry-600"></i>
+                </div>
+                <span class="font-mono text-2xl font-bold text-cocoa-200 group-hover:text-berry-300 transition duration-300">02</span>
+              </div>
+              <h3 class="font-serif text-lg sm:text-xl font-bold text-cocoa-900 leading-snug" data-t="processStep2Title">Direct Consultation</h3>
+              <p class="text-sm text-cocoa-600 leading-relaxed font-normal" data-t="processStep2Desc">
+                We chat directly over WhatsApp of call to finalize flavors, color palettes, and weight details.
+              </p>
+            </div>
+            <div class="mt-6 flex items-center gap-1.5 text-xs font-semibold text-berry-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span>Configure details</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-white border border-cocoa-100 p-8 rounded-3xl relative z-10 group shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+            <div class="space-y-6">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-600 shadow-inner group-hover:scale-110 transition duration-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-berry-600"></i>
+                </div>
+                <span class="font-mono text-2xl font-bold text-cocoa-200 group-hover:text-berry-300 transition duration-300">03</span>
+              </div>
+              <h3 class="font-serif text-lg sm:text-xl font-bold text-cocoa-900 leading-snug" data-t="processStep3Title">Bespoke Production</h3>
+              <p class="text-sm text-cocoa-600 leading-relaxed font-normal" data-t="processStep3Desc">
+                Our kitchen/studio crafts your custom design fresh with top-grade, kitchen-hygiene certified ingredients.
+              </p>
+            </div>
+            <div class="mt-6 flex items-center gap-1.5 text-xs font-semibold text-berry-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span>Configure details</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="bg-white border border-cocoa-100 p-8 rounded-3xl relative z-10 group shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+            <div class="space-y-6">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-600 shadow-inner group-hover:scale-110 transition duration-300">
+                  <i data-lucide="sparkles" class="w-5 h-5 text-berry-600"></i>
+                </div>
+                <span class="font-mono text-2xl font-bold text-cocoa-200 group-hover:text-berry-300 transition duration-300">04</span>
+              </div>
+              <h3 class="font-serif text-lg sm:text-xl font-bold text-cocoa-900 leading-snug" data-t="processStep4Title">Secure Collection/Delivery</h3>
+              <p class="text-sm text-cocoa-600 leading-relaxed font-normal" data-t="processStep4Desc">
+                Pick up your cake box or customized trousseau safely from our Ludhiana studio or enjoy luxury transit.
+              </p>
+            </div>
+            <div class="mt-6 flex items-center gap-1.5 text-xs font-semibold text-berry-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span>Configure details</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Action Button scrolling to form -->
+        <div class="text-center mt-16">
+          <a href="#order-form" class="inline-flex items-center gap-2 px-8 py-4 bg-cocoa-800 hover:bg-cocoa-900 text-cream-50 font-bold rounded-full shadow-md hover:scale-[1.02] transition-all">
+            <span data-t="navProcess">Draft Your Package Inquiry</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE ORDER CustomizerFORM BUILDER -->
+    <section id="order-form" class="py-24 bg-cream-100 relative overflow-hidden text-left">
+      
+      <!-- Ornamental background drops -->
+      <div class="absolute top-[10%] left-[-10%] w-[450px] h-[450px] rounded-full bg-berry-100/50 blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-[10%] right-[-10%] w-[450px] h-[450px] rounded-full bg-cream-300/40 blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Form Header -->
+        <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-berry-500 font-bold bg-berry-100 px-3 py-1 rounded-full inline-block" data-t="orderBadge">
+            Interactive Inquirer
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-cocoa-900 leading-tight" data-t="orderTitle">
+            Build Creative Inquiry
+          </h2>
+          <div class="w-16 h-1 bg-berry-400 mx-auto rounded-full"></div>
+          <p class="font-sans text-sm sm:text-base text-cocoa-600 max-w-xl mx-auto font-normal text-center" data-t="orderSubtitle">
+            Adjust sliders, select flavor profiles, dates, and send a customized draft instantly to our WhatsApp team for pricing and confirmations.
+          </p>
+        </div>
+
+        <!-- Split Grid columns form builder and receipt review ticket -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- LEFT COLLUMN: Interactive build form -->
+          <div class="lg:col-span-7 bg-white p-6 sm:p-10 rounded-3xl border border-cocoa-100/70 shadow-xl space-y-6">
+            
+            <h3 class="font-serif text-2xl font-bold text-cocoa-900 border-b border-cocoa-101 pb-3 flex items-center gap-2">
+              <i data-lucide="shopping-bag" class="w-6 h-6 text-berry-500"></i>
+              <span data-t="orderStepTitle">Construct Your Order Spec</span>
+            </h3>
+
+            <div class="space-y-5">
+              
+              <!-- Category Selector Buttons -->
+              <div class="space-y-2">
+                <label class="text-xs font-bold uppercase tracking-wider text-cocoa-600 block" data-t="orderSelectCatLabel">
+                  Offering Category
+                </label>
+                
+                <!-- Buttons helper state sync -->
+                <div class="grid grid-cols-2 gap-2 select-none mb-3">
+                  <button type="button" data-cat-btn="itemCustomCakesTitle" class="py-3 px-4 text-xs sm:text-sm font-semibold rounded-2xl border text-center transition-all bg-berry-500 text-cream-50 border-berry-500 shadow-sm">
+                    🎂 Custom Cakes
+                  </button>
+                  <button type="button" data-cat-btn="itemGiftHampersTitle" class="py-3 px-4 text-xs sm:text-sm font-semibold rounded-2xl border text-center transition-all bg-cream-50 hover:bg-cream-100 text-cocoa-800 border-cocoa-150">
+                    🎁 Gift Hampers
+                  </button>
+                  <button type="button" data-cat-btn="itemReturnGiftsTitle" class="py-3 px-4 text-xs sm:text-sm font-semibold rounded-2xl border text-center transition-all bg-cream-50 hover:bg-cream-100 text-cocoa-800 border-cocoa-150">
+                    🎀 Return Gifts
+                  </button>
+                  <button type="button" data-cat-btn="itemTrousseauTitle" class="py-3 px-4 text-xs sm:text-sm font-semibold rounded-2xl border text-center transition-all bg-cream-50 hover:bg-cream-100 text-cocoa-800 border-cocoa-150">
+                    💝 Trousseau Packing
+                  </button>
+                </div>
+                
+                <!-- Hidden/Backup drop-down select option -->
+                <select id="order-category-select" class="w-full bg-cream-50 border border-cocoa-100 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-berry-200 text-cocoa-900 text-sm font-medium">
+                  <option value="🎂 Custom Cakes">🎂 Custom Cakes</option>
+                  <option value="🎁 Gift Hampers">🎁 Gift Hampers</option>
+                  <option value="🎀 Return Gifts">🎀 Return Gifts</option>
+                  <option value="💝 Trousseau Packing">💝 Trousseau Packing</option>
+                </select>
+              </div>
+
+              <!-- Occasion Theme specifications -->
+              <div class="space-y-2">
+                <label class="text-xs font-bold uppercase tracking-wider text-cocoa-600 block" data-t="orderOccasionLabel">
+                  Theme/Color Customization Requirements
+                </label>
+                <span class="text-[10px] text-cocoa-400 block -mt-1 mb-1" data-t="orderOccasionPlaceholder">Describe your theme, e.g., Pastel Mint Green, Chocolate Overload, Golden Trousseau...</span>
+                <input id="order-theme-input" type="text" placeholder="e.g., Baby Shower, 1st Birthday, Floral Wedding theme" class="w-full bg-cream-50 border border-cocoa-100 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-berry-200 text-cocoa-900 placeholder:text-stone-400 text-sm font-medium">
+              </div>
+
+              <!-- CONDITIONALS INPUT GROUP 1: Custom Cakes selectors -->
+              <div id="cake-conditional-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <!-- Flavor select list -->
+                <div class="space-y-2">
+                  <label class="text-xs font-bold uppercase tracking-wider text-cocoa-600 block" data-t="orderEgglessFlavorLabel">
+                    Flavor Profile (For Cakes/Cookies)
+                  </label>
+                  <select id="order-flavor-select" class="w-full bg-cream-50 border border-cocoa-100 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-berry-200 text-cocoa-900 text-sm font-medium">
+                    <option value="Signature Chocolate Truffle 🍫">Signature Chocolate Truffle 🍫</option>
+                    <option value="Fresh Strawberry Cream 🍓">Fresh Strawberry Cream 🍓</option>
+                    <option value="Red Velvet Velvet Dream 🍰">Red Velvet Velvet Dream 🍰</option>
+                    <option value="Madagascar Vanilla Buttercream 🍦">Madagascar Vanilla Buttercream 🍦</option>
+                    <option value="Mango-Pineapple Tropical Burst 🍍">Mango-Pineapple Tropical Burst 🍍</option>
+                    <option value="Salted Caramel Crunch 🍯">Salted Caramel Crunch 🍯</option>
+                  </select>
+                </div>
+
+                <!-- Weight select input -->
+                <div class="space-y-2">
+                  <label class="text-xs font-bold uppercase tracking-wider text-cocoa-600 block" data-t="orderWeightLabel">
+                    Cakes Weight OR Gift Item Qty
+                  </label>
+                  <input id="order-weight-input" type="text" value="1.0 Kg" placeholder="e.g., 1.5 Kg" class="w-full bg-cream-50 border border-cocoa-100 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-berry-200 text-cocoa-900 placeholder:text-stone-400 text-sm font-medium">
+                </div>
+
+              </div>
+
+              <!-- CONDITIONALS INPUT GROUP 2: Wood packing style & Qty selectors -->
+              <div id="non-cake-conditional-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-4 hidden">
+                
+                <!-- Packing box list -->
+                <div class="space-y-2">
+                  <label class="text-xs font-bold uppercase tracking-wider text-cocoa-600 block" data-t="orderPackingStyleLabel">
+                    Trousseau Wood/Velvet Tray Preference
+                  </label>
+                  <select id="order-packing-select" class="w-full bg-cream-50 border border-cocoa-100 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-berry-200 text-cocoa-900 text-sm font-medium">
+                    <option value="Suede Basket / Tray 🌸">Suede Basket / Tray 🌸</option>
+                    <option value="Premium Wooden Chest 🪵">Premium Wooden Chest 🪵</option>
+                    <option value="Transparent Acrylic Mirror Box 💎">Transparent Acrylic Mirror Box 💎</option>
+                    <option value="Artisanal Lace Wrapping Wrapper 🎀">Artisanal Lace Wrapping Wrapper 🎀</option>
+                    <option value="Biodegradable Handmade Jute Bags 🌾">Biodegradable Handmade Jute Bags 🌾</option>
+                  </select>
+                </div>
+
+                <!-- Qty input -->
+                <div class="space-y-2">
+                  <label class="text-xs font-bold uppercase tracking-wider text-cocoa-600 block" data-t="orderQtyLabel">
+                    Cakes Weight OR Gift Item Qty
+                  </label>
+                  <input id="order-qty-input" type="text" value="1 Tray/Box" placeholder="e.g., 15 boxes" class="w-full bg-cream-50 border border-cocoa-100 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-berry-200 text-cocoa-900 placeholder:text-stone-400 text-sm font-medium">
+                </div>
+
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <!-- Calendar date picker -->
+                <div class="space-y-2">
+                  <label class="text-xs font-bold uppercase tracking-wider text-cocoa-600 block flex items-center gap-1">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-berry-500"></i>
+                    <span data-t="orderRequiredDateLabel">Preferred Delivery/Pickup Date</span>
+                  </label>
+                  <input id="order-date-input" type="date" class="w-full bg-cream-50 border border-cocoa-100 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-berry-200 text-cocoa-900 text-sm font-medium">
+                  <span class="text-[10px] text-cocoa-500 italic block mt-1" data-t="orderRequiredDateNote">Minimum 24-48 hours lead time recommended</span>
+                </div>
+
+                <!-- Message board note -->
+                <div class="space-y-2">
+                  <label class="text-xs font-bold uppercase tracking-wider text-cocoa-600 block" data-t="orderMessageOnCakeLabel">
+                    Special Celebration Message or Packaging Note
+                  </label>
+                  <input id="order-message-input" type="text" placeholder="e.g., 'Happy Anniversary!'" class="w-full bg-cream-50 border border-cocoa-100 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-berry-200 text-cocoa-900 placeholder:text-stone-400 text-sm font-medium">
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- Submit to WhatsApp Button -->
+            <div class="pt-4">
+              <a id="order-submit-wa" href="" target="_blank" rel="noopener noreferrer" class="w-full py-4 bg-berry-500 hover:bg-berry-600 text-cream-50 font-bold rounded-2xl flex items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all hover:scale-[1.01]">
+                <i data-lucide="message-circle" class="w-5 h-5 fill-current"></i>
+                <span data-t="orderSendWaBtn">Draft WhatsApp Message & Send</span>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: Dynamic Live Receipt Overview -->
+          <div class="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+            
+            <div class="bg-cocoa-900 text-cream-50 p-6 sm:p-8 rounded-3xl border border-cocoa-800 shadow-xl relative overflow-hidden text-left live-receipt">
+              
+              <!-- Cake backdrop SVG water-print trace -->
+              <div class="absolute -bottom-10 -right-10 w-44 h-44 rounded-full bg-cream-100/5 opacity-10 flex items-center justify-center text-white p-2 pointer-events-none">
+                <i data-lucide="cake" class="w-full h-full stroke-[1] stroke-white"></i>
+              </div>
+
+              <!-- Invoice header title -->
+              <div class="flex items-center justify-between border-b border-cocoa-800 pb-4 mb-6">
+                <div>
+                  <span class="font-mono text-xs uppercase text-cream-300 tracking-widest block font-bold">INQUIRY DRAFT</span>
+                  <span class="font-serif text-lg font-bold block mt-0.5" data-t="orderLiveBoardTitle">LIVE RECEIPT PREVIEW</span>
+                </div>
+                <div class="px-2.5 py-1 bg-berry-500 text-white font-bold text-[10px] uppercase font-mono tracking-widest rounded-full flex items-center gap-1">
+                  <i data-lucide="sparkles" class="w-3" style="color: #fcd34d;"></i>
+                  <span>Real-Time</span>
+                </div>
+              </div>
+
+              <!-- Lines items calculations -->
+              <div class="space-y-4 font-mono text-xs sm:text-sm leading-relaxed border-b border-cocoa-800/65 pb-6 mb-6">
+                
+                <div class="flex justify-between items-start gap-4">
+                  <span class="text-cocoa-400">CATEGORY:</span>
+                  <span id="receipt-val-category" class="text-right font-bold text-cream-100">🎂 Custom Cakes</span>
+                </div>
+
+                <div id="receipt-row-theme" class="flex justify-between items-start gap-4 hidden">
+                  <span class="text-cocoa-400">THEME/OCCASION:</span>
+                  <span id="receipt-val-theme" class="text-right font-bold text-cream-100">—</span>
+                </div>
+
+                <div id="receipt-row-style" class="flex justify-between items-start gap-4">
+                  <span id="receipt-label-style" class="text-cocoa-400">FLAVOR TYPE:</span>
+                  <span id="receipt-val-style" class="text-right font-bold text-cream-100">Signature Chocolate Truffle 🍫</span>
+                </div>
+
+                <div id="receipt-row-spec" class="flex justify-between items-start gap-4">
+                  <span id="receipt-label-spec" class="text-cocoa-400">ESTIMATED WEIGHT:</span>
+                  <span id="receipt-val-spec" class="text-right font-bold text-cream-200 bg-berry-500/15 px-2 rounded">1.0 Kg</span>
+                </div>
+
+                <div id="receipt-row-date" class="flex justify-between items-start gap-4 hidden">
+                  <span class="text-cocoa-400">REQUIRED DATE:</span>
+                  <span id="receipt-val-date" class="text-right font-bold text-cream-100">—</span>
+                </div>
+
+                <div id="receipt-row-message" class="flex justify-between items-start gap-4 hidden">
+                  <span class="text-cocoa-400">CARD MESSAGE:</span>
+                  <span id="receipt-val-message" class="text-right font-bold text-amber-200">—</span>
+                </div>
+
+                <div class="flex justify-between items-start gap-4 pt-2 border-t border-cocoa-800/40">
+                  <span class="text-cocoa-400">DIET PROTOCOL:</span>
+                  <span class="text-emerald-400 font-bold tracking-widest text-[12px]">★ 100% EGGLESS</span>
+                </div>
+
+              </div>
+
+              <!-- Disclaimer instructions box -->
+              <div class="bg-cocoa-950 p-4 rounded-xl border border-cocoa-800 space-y-2">
+                <p class="text-xs text-cocoa-400 leading-relaxed leading-normal">
+                  Upon clicking send, your smartphone or desktop will open WhatsApp directly with these specifications pre-configured, so you don't have to re-type details.
+                </p>
+                <div class="flex items-center gap-1.5 text-xs text-berry-300 font-bold">
+                  <i data-lucide="check-square" class="w-4 h-4 text-berry-400 shrink-0"></i>
+                  <span>Verified 100% Secure & Direct Connection</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Review card -->
+            <div class="bg-white p-5 rounded-3xl border border-cocoa-100 flex gap-3.5 items-start text-left">
+              <div class="w-10 h-10 rounded-full bg-berry-50 flex items-center justify-center shrink-0">
+                <i data-lucide="heart" class="w-5 h-5 text-berry-500 fill-berry-100"></i>
+              </div>
+              <div class="space-y-1">
+                <p class="text-xs text-cocoa-700 italic">
+                  "No automated, frustrating bot lines! I order via WhatsApp and get to check specifications directly with the kind owner."
+                </p>
+                <span class="text-[10px] uppercase font-mono tracking-wider font-bold text-cocoa-400 block">— Ritu S., Ludhiana</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT DETAILS & ADDRESS MAP SECTION -->
+    <section id="contact" class="py-24 bg-white relative text-left">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-berry-500 font-bold bg-berry-100 px-3 py-1 rounded-full inline-block" data-t="contactBadge">
+            Visit Or Call Us
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-cocoa-900 leading-tight" data-t="contactTitle">
+            Reach Out To Our Studio
+          </h2>
+          <div class="w-16 h-1 bg-berry-400 mx-auto rounded-full"></div>
+          <p class="font-sans text-sm sm:text-base text-cocoa-600 max-w-xl mx-auto font-normal text-center" data-t="contactSubtitle">
+            Located in the heart of Ludhiana, sweet custom perfection is just a phone call or quick message away.
+          </p>
+        </div>
+
+        <!-- Details cards split layout -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center sm:text-left">
+          
+          <!-- Card 1 -->
+          <div class="p-8 rounded-3xl bg-cream-50 border border-cocoa-100 flex flex-col items-center sm:items-start justify-between space-y-6">
+            <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-500 shadow-sm">
+              <i data-lucide="map-pin" class="w-6 h-6 stroke-[2.3]"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-serif text-xl font-bold text-cocoa-900" data-t="contactCardStudioTitle">The Design Studio</h3>
+              <p class="text-sm text-cocoa-600 font-medium" data-t="contactCardStudioDesc">
+                Ludhiana Model Town / Canal Area Road, Punjab, India
+              </p>
+            </div>
+            <a href="https://maps.google.com" target="_blank" class="text-xs font-bold font-mono tracking-widest uppercase text-berry-500 hover:text-berry-600 flex items-center gap-1">
+              <span>View On Maps</span>
+              <i data-lucide="arrow-right" class="w-3 h-3"></i>
+            </a>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-8 rounded-3xl bg-cream-50 border border-cocoa-101 flex flex-col items-center sm:items-start justify-between space-y-6">
+            <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-500 shadow-sm">
+              <i data-lucide="phone" class="w-6 h-6 stroke-[2.3]"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-serif text-xl font-bold text-cocoa-900" data-t="contactCardCallTitle">Talk With Our Chef</h3>
+              <p class="text-sm text-cocoa-600 font-medium" data-t="contactCardCallDesc">
+                Available daily for design call consultations.
+              </p>
+              <p class="text-lg font-serif font-bold text-cocoa-900">+91 7009142146</p>
+            </div>
+            <a href="tel:+917009142146" class="text-xs font-bold font-mono tracking-widest uppercase text-berry-500 hover:text-berry-600 flex items-center gap-1">
+              <span>Call Direct</span>
+              <i data-lucide="arrow-right" class="w-3 h-3"></i>
+            </a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-8 rounded-3xl bg-cream-50 border border-cocoa-100 flex flex-col items-center sm:items-start justify-between space-y-6">
+            <div class="w-12 h-12 rounded-2xl bg-berry-50 border border-berry-100 flex items-center justify-center text-berry-500 shadow-sm">
+              <i data-lucide="clock" class="w-6 h-6 stroke-[2.3]"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-serif text-xl font-bold text-cocoa-900" data-t="contactCardHoursTitle">Studio Timings</h3>
+              <p class="text-sm text-cocoa-600 font-medium" data-t="contactCardHoursDesc">
+                10:00 AM – 9:00 PM (Monday - Sunday)
+              </p>
+            </div>
+            <a href="https://wa.me/917009142146" target="_blank" class="text-xs font-bold font-mono tracking-widest uppercase text-berry-500 hover:text-berry-600 flex items-center gap-1">
+              <span>Check Slots</span>
+              <i data-lucide="arrow-right" class="w-3 h-3"></i>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER CREDITS INFO -->
+    <footer class="bg-cocoa-950 text-cream-50 pt-16 pb-8 border-t border-cocoa-900 text-left">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          
+          <!-- Column 1 -->
+          <div class="md:col-span-5 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-berry-500 flex items-center justify-center text-white">
+                <i data-lucide="cake" class="w-5 h-5"></i>
+              </div>
+              <span class="font-serif text-xl font-bold tracking-tight text-white">Home Baker's</span>
+            </div>
+            <p class="text-xs sm:text-sm text-cocoa-400 font-medium leading-relaxed max-w-sm" data-t="footerSlogan">
+              Crafting beautiful 100% eggless cakes, customizable hampers and luxury trousseau wrap designs in Ludhiana, Punjab.
+            </p>
+          </div>
+
+          <!-- Column 2 (Quick pages) -->
+          <div class="md:col-span-3 space-y-4">
+            <h4 class="font-mono text-xs uppercase tracking-widest text-cream-400 font-bold" data-t="footerLinksHeader">Quick Sections</h4>
+            <ul class="space-y-2 text-xs font-semibold text-cocoa-300">
+              <li><a href="#home" class="hover:text-berry-300 transition-colors">Home Studio</a></li>
+              <li><a href="#about" class="hover:text-berry-300 transition-colors">Our History</a></li>
+              <li><a href="#products" class="hover:text-berry-300 transition-colors">Specialty Cards</a></li>
+              <li><a href="#gallery" class="hover:text-berry-300 transition-colors">Instagram Portfolio</a></li>
+              <li><a href="./pages/additional-pages.html" class="hover:text-berry-300 transition-colors">Local Venues & Info</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3 (Direct queries) -->
+          <div class="md:col-span-4 space-y-4">
+            <h4 class="font-mono text-xs uppercase tracking-widest text-cream-400 font-bold" data-t="footerContactHeader">Direct Inquiry</h4>
+            <div class="space-y-2 text-xs text-cocoa-300">
+              <p class="flex items-center gap-1.5 font-semibold"><i data-lucide="phone" class="w-3.5 h-3.5 text-berry-400"></i> +91 7009142146</p>
+              <p class="flex items-center gap-1.5 font-semibold"><i data-lucide="mail" class="w-3.5 h-3.5 text-berry-400"></i> query@homebakersguide.com</p>
+              <p class="flex items-center gap-1.5 font-semibold"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-berry-400"></i> Ludhiana, Punjab, India</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Secondary copyright bar -->
+        <div class="border-t border-cocoa-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] sm:text-xs text-cocoa-400 select-none">
+          <p id="copyright-text" data-t="footerRights">Home Baker's Ludhiana. All design rights reserved.</p>
+          <p class="font-mono" data-t="footerDevTag">Baking quality with pure eggless traditions.</p>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- STICKY FLOATING SIDEBAR ACTIONS HELPER -->
+    <div class="fixed bottom-6 z-40 flex flex-col items-end gap-3 pointer-events-none right-6 left-auto">
+      
+      <!-- WhatsApp Balloon alert helper -->
+      <div id="whatsapp-bubble" class="bg-white text-cocoa-900 px-4 py-3 rounded-2xl shadow-2xl border border-cocoa-100 flex items-start gap-2.5 max-w-[260px] pointer-events-auto transition-all">
+        <div class="p-1.5 bg-berry-100 rounded-lg text-berry-600 shrink-0">
+          <i data-lucide="cake" class="w-4 h-4 fill-berry-200"></i>
+        </div>
+        <div class="space-y-1 text-left">
+          <p id="bubble-title" class="text-xs font-bold leading-tight text-cocoa-900">Event coming up in Ludhiana? 🎂</p>
+          <p id="bubble-text" class="text-[10px] text-cocoa-500 leading-snug">Let's design a custom 100% Eggless Cake or Hamper today!</p>
+          <button id="bubble-action-btn" onclick="selectOfferCategory('itemCustomCakesTitle')" class="text-[10px] font-bold text-berry-500 hover:text-berry-600 flex items-center gap-0.5 pt-0.5 uppercase tracking-wider cursor-pointer">
+            Build custom order
+          </button>
+        </div>
+        <button id="close-bubble" class="text-cocoa-300 hover:text-cocoa-500 focus:outline-none shrink-0 cursor-pointer" aria-label="Dismiss alarm">
+          <i data-lucide="x" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+      <!-- Action circles anchor -->
+      <div class="flex gap-2 pointer-events-auto select-none">
+        
+        <!-- Scroll-to-top button -->
+        <button id="scroll-top-btn" class="w-12 h-12 rounded-full bg-white text-cocoa-700 hover:bg-cream-100 shadow-xl border border-cocoa-150 flex items-center justify-center transition-all focus:outline-none active:scale-95 cursor-pointer" aria-label="Scroll straight to top">
+          <i data-lucide="chevron-up" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Direct general WhatsApp click link -->
+        <a href="https://wa.me/917009142146?text=Hi%20Home%20Bakers!%20I%20visited%2520your%2520website%20and%20would%20like%20to%20discuss%20a%20delicious%20order." target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 animate-bounce-slow" aria-label="Order on WhatsApp directly">
+          <svg class="w-7 h-7 fill-white stroke-none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.011 2c-5.503 0-9.982 4.477-9.982 9.977 0 1.914.542 3.702 1.482 5.222L2 22l5.006-1.325a9.92 9.92 0 0 0 5.005 1.341c5.503 0 9.982-4.477 9.982-9.977 0-5.5-4.479-9.977-9.982-9.977zm5.727 14.153c-.237.668-1.378 1.285-1.901 1.336-.454.044-.949.197-2.955-.615-2.527-1.026-4.14-3.593-4.266-3.76-.123-.167-1.018-1.353-1.018-2.582 0-1.229.645-1.83 1.018-1.83.371 0 .618.044.825.044.204 0 .378-.044.582.446.204.493.693 1.693.753 1.815.061.123.09.267.01.442-.08.175-.165.289-.289.442-.123.153-.263.344-.378.463-.127.127-.26.267-.113.518.147.25.653 1.077 1.401 1.745.961.859 1.77 1.127 2.018 1.228.25.101.393.088.542-.08.147-.167.632-.733.8-.985.167-.25.337-.21.56-.123.226.088 1.428.673 1.675.797.247.123.411.18.471.289.061.109.061.632-.176 1.301z"/>
+          </svg>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    // Initialize icons
+    lucide.createIcons();
+  </script>
+
+  <!-- Module Scripts -->
+  <script src="./js/translations.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+</html>

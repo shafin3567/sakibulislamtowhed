@@ -1,19 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-
-export type Language = "en" | "pa" | "hi" | "ur";
-
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
-  isRtl: boolean;
-}
-
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
-const translations: Record<Language, Record<string, string>> = {
+const translations = {
   en: {
-    // Announcement & Navigation
     announcement: "✨ 100% Eggless Cakes & Exclusive Premium Hampers in Ludhiana ✨",
     logoSubtitle: "LUDHIANA • ESTABLISHED QUALITY",
     callUs: "Call Us",
@@ -102,19 +88,22 @@ const translations: Record<Language, Record<string, string>> = {
     processStep4Desc: "Pick up your cake box or customized trousseau safely from our Ludhiana studio or enjoy luxury transit.",
 
     // Order Form
-    formBadge: "Interactive Inquirer",
-    formTitle: "Build Creative Inquiry",
-    formSubtitle: "Adjust sliders, select flavor profiles, dates, and send a customized draft instantly to our WhatsApp team for pricing and confirmations.",
-    formCategoryLabel: "Offering Category",
-    formThemeLabel: "Theme/Color Customization Requirements",
-    formThemePlaceholder: "Describe your theme, e.g., Pastel Mint Green, Chocolate Overload, Golden Trousseau...",
-    formFlavorLabel: "Flavor Profile (For Cakes/Cookies)",
-    formWeightQtyLabel: "Cakes Weight OR Gift Item Qty",
-    formDateLabel: "Preferred Delivery/Pickup Date",
-    formSpecialMsgLabel: "Special Celebration Message or Packaging Note",
-    formSpecialMsgPlaceholder: "Write any text to go on the cake, or specific items you'd love inside hampers...",
-    formSelectTrousseauLabel: "Trousseau Wood/Velvet Tray Preference",
-    formSendWaBtn: "Draft WhatsApp Message & Send",
+    orderBadge: "Interactive Inquirer",
+    orderTitle: "Build Creative Inquiry",
+    orderSubtitle: "Adjust sliders, select flavor profiles, dates, and send a customized draft instantly to our WhatsApp team for pricing and confirmations.",
+    orderStepTitle: "Construct Your Order Spec",
+    orderSelectCatLabel: "Offering Category",
+    orderOccasionLabel: "Theme/Color Customization Requirements",
+    orderOccasionPlaceholder: "Describe your theme, e.g., Pastel Mint Green, Chocolate Overload, Golden Trousseau...",
+    orderEgglessFlavorLabel: "Flavor Profile (For Cakes/Cookies)",
+    orderWeightLabel: "Cakes Weight OR Gift Item Qty",
+    orderPackingStyleLabel: "Trousseau Wood/Velvet Tray Preference",
+    orderQtyLabel: "Cakes Weight OR Gift Item Qty", 
+    orderRequiredDateLabel: "Preferred Delivery/Pickup Date",
+    orderRequiredDateNote: "Minimum 24-48 hours lead time recommended",
+    orderMessageOnCakeLabel: "Special Celebration Message or Packaging Note",
+    orderLiveBoardTitle: "LIVE RECEIPT PREVIEW",
+    orderSendWaBtn: "Draft WhatsApp Message & Send",
     formSuccessMsg: "Generating customized WhatsApp outline...",
 
     // Contact Us / Location
@@ -161,7 +150,6 @@ const translations: Record<Language, Record<string, string>> = {
     bulletBridalMatch: "Color-coordinated layouts matching bridal lehengas"
   },
   pa: {
-    // Announcement & Navigation
     announcement: "✨ ਲੁਧਿਆਣਾ ਵਿੱਚ 100% ਬਿਨਾਂ ਅੰਡੇ ਵਾਲੇ ਕੇਕ ਅਤੇ ਵਿਸ਼ੇਸ਼ ਪ੍ਰੀਮੀਅਮ ਹੈਂਪਰ ✨",
     logoSubtitle: "ਲੁਧਿਆਣਾ • ਸਥਾਪਿਤ ਗੁਣਵੱਤਾ",
     callUs: "ਕਾਲ ਕਰੋ",
@@ -250,20 +238,22 @@ const translations: Record<Language, Record<string, string>> = {
     processStep4Desc: "ਲੁਧਿਆਣਾ ਸਟੂਡੀਓ ਤੋਂ ਆਪਣਾ ਕੇਕ ਲਓ ਜਾਂ ਸ਼ਾਹੀ ਡਿਲੀਵਰੀ ਦਾ ਆਨੰਦ ਲਓ।",
 
     // Order Form
-    formBadge: "ਆਰਡਰ ਬਿਲਡਰ",
-    formTitle: "ਪੁੱਛਗਿੱਛ ਤਿਆਰ ਕਰੋ",
-    formSubtitle: "ਡਿਜ਼ਾਈਨ, ਫਲੇਵਰ, ਮਿਤੀ ਸੈੱਟ ਕਰੋ ਅਤੇ ਵਟਸਐਪ 'ਤੇ ਸਾਡੀ ਟੀਮ ਨਾਲ ਸਿੱਧੀ ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕਰੋ।",
-    formCategoryLabel: "ਆਫਰਿੰਗ ਕੈਟੇਗਰੀ",
-    formThemeLabel: "ਥੀਮ/ਰੰਗ ਦੀਆਂ ਲੋੜਾਂ",
-    formThemePlaceholder: "ਆਪਣੇ ਮਨਪਸੰਦ ਰੰਗ ਜਾਂ ਥੀਮ ਦਾ ਵੇਰਵਾ ਦਿਓ, ਜਿਵੇਂ ਕਿ ਚਾਕਲੇਟ, ਪੇਸਟਲ ਗ੍ਰੀਨ...",
-    formFlavorLabel: "ਫਲੇਵਰ ਪ੍ਰੋਫਾਈਲ (ਕੇਕ/ਕੂਕੀਜ਼ ਲਈ)",
-    formWeightQtyLabel: "ਕੇਕ ਦਾ ਭਾਰ ਜਾਂ ਚੀਜ਼ਾਂ ਦੀ ਗਿਣਤੀ",
-    formDateLabel: "ਡਿਲੀਵਰੀ/ਪਿਕਅੱਪ ਦੀ ਮਿਤੀ",
-    formSpecialMsgLabel: "ਵਿਸ਼ੇਸ਼ ਸੰਦੇਸ਼ ਜਾਂ ਪੈਕਿੰਗ ਨੋਟ",
-    formSpecialMsgPlaceholder: "ਕੇਕ 'ਤੇ ਲਿਖਿਆ ਜਾਣ ਵਾਲਾ ਨਾਮ ਜਾਂ ਹੈਂਪਰ ਦੀਆਂ ਖਾਸ ਚੀਜ਼ਾਂ...",
-    formSelectTrousseauLabel: "ਟਰੂਸੋ ਟ੍ਰੇਅ (ਲੱਕੜ/ਵੈਲਵੇਟ) ਦੀ ਤਰਜੀਹ",
-    formSendWaBtn: "ਵਟਸਐਪ 'ਤੇ ਪੁੱਛਗਿੱਛ ਭੇਜੋ",
-    formSuccessMsg: "ਵਟਸਐਪ ਮੈਸੇਜ ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+    orderBadge: "ਆਰਡਰ ਬਿਲਡਰ",
+    orderTitle: "ਪੁੱਛਗਿੱਛ ਤਿਆਰ ਕਰੋ",
+    orderSubtitle: "ਵਜ਼ਨ, ਫਲੇਵਰ, ਮਿਤੀ ਸੈੱਟ ਕਰੋ ਅਤੇ ਵਟਸਐਪ 'ਤੇ ਸਾਡੀ ਟੀਮ ਨਾਲ ਸਿੱਧੀ ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕਰੋ।",
+    orderStepTitle: "ਆਰਡਰ ਦੀਆਂ ਲੋੜਾਂ",
+    orderSelectCatLabel: "ਆਫਰਿੰਗ ਕੈਟੇਗਰੀ",
+    orderOccasionLabel: "ਥੀਮ/ਰੰਗ ਦੀਆਂ ਲੋੜਾਂ",
+    orderOccasionPlaceholder: "ਆਪਣੇ ਮਨਪਸੰਦ ਰੰਗ ਜਾਂ ਥੀਮ ਦਾ ਵੇਰਵਾ ਦਿਓ, ਜਿਵੇਂ ਕਿ ਚਾਕਲੇਟ, ਪੇਸਟਲ ਗ੍ਰੀਨ...",
+    orderEgglessFlavorLabel: "ਫਲੇਵਰ ਪ੍ਰੋਫਾਈਲ (ਕੇਕ/ਕੂਕੀਜ਼ ਲਈ)",
+    orderWeightLabel: "ਕੇਕ ਦਾ ਭਾਰ ਜਾਂ ਚੀਜ਼ਾਂ ਦੀ ਗਿਣਤੀ",
+    orderPackingStyleLabel: "ਟਰੂਸੋ ਟ੍ਰੇਅ (ਲੱਕੜ/ਵੈਲਵੇਟ) ਦੀ ਤਰਜੀਹ",
+    orderQtyLabel: "ਕੇਕ ਦਾ ਭਾਰ ਜਾਂ ਚੀਜ਼ਾਂ ਦੀ ਗਿਣਤੀ",
+    orderRequiredDateLabel: "ਡਿਲੀਵਰੀ/ਪਿਕਅੱਪ ਦੀ ਮਿਤੀ",
+    orderRequiredDateNote: "ਘੱਟੋ-ਘੱਟ 24-48 ਘੰਟੇ ਪਹਿਲਾਂ ਆਰਡਰ ਦੇਣਾ ਯਕੀਨੀ ਬਣਾਓ",
+    orderMessageOnCakeLabel: "ਵਿਸ਼ੇਸ਼ ਸੰਦੇਸ਼ ਜਾਂ ਪੈਕਿੰਗ ਨੋਟ",
+    orderLiveBoardTitle: "ਲਾਈਵ ਬਿਲਿੰਗ ਪ੍ਰੀਵਿਊ",
+    orderSendWaBtn: "ਵਟਸਐਪ 'ਤੇ ਪੁੱਛਗਿੱਛ ਭੇਜੋ",
 
     // Contact Us / Location
     contactBadge: "ਮੁਲਾਕਾਤ ਜਾਂ ਕਾਲ ਕਰੋ",
@@ -308,7 +298,6 @@ const translations: Record<Language, Record<string, string>> = {
     bulletBridalMatch: "ਲਹਿੰਗੇ ਦੇ ਰੰਗ ਨਾਲ ਮੇਲ ਖਾਂਦੀਆਂ ਸਜਾਵਟਾਂ"
   },
   hi: {
-    // Announcement & Navigation
     announcement: "✨ लुधियाना में 100% बिना अंडे वाले केक और विशेष प्रीमियम हैंपर्स ✨",
     logoSubtitle: "लुधियाना • स्थापित गुणवत्ता",
     callUs: "कॉल करें",
@@ -337,7 +326,7 @@ const translations: Record<Language, Record<string, string>> = {
     // About Us
     aboutBadge: "हमारी गौरवमयी कहानी",
     aboutTitle: "लुधियाना में प्यार और खूबसूरत यादें संजोना",
-    aboutText1: "साधारण ओवन से शुरुआत कर लुधियाना की सर्वश्रेष्ठ डिजाइनर केक सर्विस तक, हमारा सफर गुणवत्ता, 100% शाकाहारी शुद्धता और प्रीमियम सौंदर्य पर आधारित है।",
+    aboutText1: "साधारण ओवन से शुरुआत कर लुधियाना की सर्वश्रेष्ठ डेशाइनर केक सर्विस तक, हमारा सफर गुणवत्ता, 100% शाकाहारी शुद्धता और प्रीमियम सौंदर्य पर आधारित है।",
     aboutText2: "हर केक ताजा बेक किया जाता है। प्रत्येक उपहार टोकरी और ट्रे को बेहद करीने से आपके थीम के अनुसार सजाया जाता है जो शाही एहसास कराती है।",
     aboutStatsYears: "वर्षों का अनुभव",
     aboutStatsEggless: "100% शुद्ध शाकाहारी",
@@ -351,7 +340,7 @@ const translations: Record<Language, Record<string, string>> = {
     catalogPremiumLudhiana: "प्रीमियम लुधियाना सेवा",
     catalogCustomizeBtn: "अनुकूलित करें और पूछताछ करें",
     catalogBrochureBtn: "व्हाट्सएप ब्रोशर",
-    catalogShareTitle: "यह कैटलॉग साझा करें:",
+    catalogShareTitle: "यह कैंडलॉग साझा करें:",
     catalogShareCopied: "लिंक कॉपी हो गया!",
     catalogShareCopyBtn: "लिंक कॉपी करें",
     catalogShareWaBtn: "शेयर करें",
@@ -386,7 +375,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Order Process
     processBadge: "कैसे काम करता है",
     processTitle: "आसान ऑर्डरिंग अनुभव",
-    processSubtitle: "अपनी पसंद का केक या विशेष उत्सव पैकिंग प्राप्त करना बेहद सरल, स्पष्ट और पारदर्शी है।",
+    processSubtitle: "अपनी पसंद का केक या विशेष उत्सव पैकिंग प्राप्त करना बेहद सरल, स्पष्ट और पारदर्शक है।",
     processStep1Title: "श्रेणी और आवश्यकताएं",
     processStep1Desc: "अपनी पसंद की कैटेगरी और डिजाइन चुनें। सबमिट कर हमें इन्क्वायरी भेजें।",
     processStep2Title: "सीधी बातचीत",
@@ -397,20 +386,22 @@ const translations: Record<Language, Record<string, string>> = {
     processStep4Desc: "हमारे लुधियाना स्टूडियो से केक प्राप्त करें या विशेष डिलीवरी सेवा का आनंद लें।",
 
     // Order Form
-    formBadge: "इंटरेक्टिव निर्माता",
-    formTitle: "पूछताछ तैयार करें",
-    formSubtitle: "वजन, फ्लेवर, डिलीवरी की तारीख चुनें और हमारी व्हाट्सएप टीम को तुरंत संदेश भेजें।",
-    formCategoryLabel: "कैटेगरी",
-    formThemeLabel: "थीम / रंग की आवश्यकताएं",
-    formThemePlaceholder: "अपनी पसंदीदा थीम बताएं, जैसे मखमली लाल, चॉकलेट ओवरलोड, स्वर्णिम पैकिंग...",
-    formFlavorLabel: "फ्लेवर प्रोफाइल (केक/कुकीज)",
-    formWeightQtyLabel: "केक का वजन या सामान की मात्रा",
-    formDateLabel: "पसंदीदा डिलीवरी/पिकअप तिथि",
-    formSpecialMsgLabel: "विशेष संदेश या पैकेजिंग नोट",
-    formSpecialMsgPlaceholder: "केक पर लिखे जाने वाला नाम या उपहार टोकरी की विशेष वस्तुएं...",
-    formSelectTrousseauLabel: "ट्रे पसंद (मखमली/लकड़ी)",
-    formSendWaBtn: "व्हाट्सएप पर भेजें",
-    formSuccessMsg: "व्हाट्सएप संदेश तैयार हो रहा है...",
+    orderBadge: "इंटरेक्टिव निर्माता",
+    orderTitle: "पूछताछ तैयार करें",
+    orderSubtitle: "वजन, फ्लेवर, डिलीवरी की तारीख चुनें और हमारी व्हाट्सएप टीम को तुरंत संदेश भेजें।",
+    orderStepTitle: "ऑर्डर विवरण भरें",
+    orderSelectCatLabel: "कैटेगरी",
+    orderOccasionLabel: "थीम / रंग की आवश्यकताएं",
+    orderOccasionPlaceholder: "अपनी पसंदीदा थीम बताएं, जैसे मखमली लाल, चॉकलेट ओवरलोड, स्वर्णिम पैकिंग...",
+    orderEgglessFlavorLabel: "फ्लेवर प्रोफाइल (केक/कुकीज)",
+    orderWeightLabel: "केक का वजन या सामान की मात्रा",
+    orderPackingStyleLabel: "ट्रे पसंद (मखमली/लकड़ी)",
+    orderQtyLabel: "केक का वजन या सामान की मात्रा",
+    orderRequiredDateLabel: "पसंदीदा डिलीवरी/पिकअप तिथि",
+    orderRequiredDateNote: "कम से कम 24-48 घंटे पहले आर्डर करने की आवश्यकता",
+    orderMessageOnCakeLabel: "विशेष संदेश या पैकेजिंग नोट",
+    orderLiveBoardTitle: "लाइव बिलिंग विवरण",
+    orderSendWaBtn: "व्हाट्सएप पर भेजें",
 
     // Contact Us / Location
     contactBadge: "मुलाकात या कॉल करें",
@@ -428,7 +419,7 @@ const translations: Record<Language, Record<string, string>> = {
     footerLinksHeader: "महत्वपूर्ण लिंक्स",
     footerContactHeader: "सीधी पूछताछ",
     footerRights: "होम बेकर्स लुधियाना। सर्वाधिकार सुरक्षित।",
-    footerDevTag: "शाकाहारी उत्तम गुणवत्ता और अटूट विश्वास।",
+    footerDevTag: "शाकाहारी उत्तम गुणवत्ता व अटूट विश्वास।",
 
     itemCustomCakesTitle: "🎂 कस्टमाइज्ड केक",
     itemCustomCakesDesc: "हमारे 100% बिना अंडे वाले केक ताजे और शुद्ध सामग्रियों से बनते हैं ताकि आपके उत्सव में चार चांद लग सकें।",
@@ -455,7 +446,6 @@ const translations: Record<Language, Record<string, string>> = {
     bulletBridalMatch: "दुल्हन के लहंगे से मेल खाती सुसज्जित पैकिंग"
   },
   ur: {
-    // Announcement & Navigation
     announcement: "✨ لدھیانہ میں 100% بغیر انڈے کے کیک اور خصوصی پریمیم ہیمپرز ✨",
     logoSubtitle: "لدھیانہ • قائم شدہ معیار",
     callUs: "کال کریں",
@@ -484,11 +474,12 @@ const translations: Record<Language, Record<string, string>> = {
     // About Us
     aboutBadge: "ہماری کہانی",
     aboutTitle: "لدھیانہ میں محبت اور خوبصورت یادیں سجانا",
-    aboutText1: "سادہ اون سے لے کر لدھیانہ کی بہترین کسٹم ڈیزائنر سروس تک، ہمارا سفر معیار، 100% خالص سبزی خور پاکیزگی اور پریمیم خوبصورتی پر مبنی ہے۔",
+    aboutText1: "سادہ اون سے لے کر لدھیانہ کی بہترین کسٹم ڈیزائنر سروس تک, ہمارا سفر معیار, 100% خالص سبزی خور پاکیزگی اور پریمیم خوبصورتی پر مبنی ہے۔",
     aboutText2: "ہر کیک تازہ تیار کیا جاتا ہے۔ ہر گفٹ باسکٹ اور ٹرے کو نہایت نفاست سے آپ کے تھیم کے مطابق سجایا جاتا ہے جو شاہی احساس پیدا کرتی ہے۔",
     aboutStatsYears: "سالوں کا تجربہ",
     aboutStatsEggless: "100% خالص سبزی خور",
     aboutStatsDesigns: "تھیم ڈیزائنز",
+    aboutQuote: '"मेरी बहन की शादी की पैकिंग में अद्भुत बारीकियों का काम किया गया था! असली विलासिता।"', // Keep Urdu translations pure
     aboutQuote: '"میری بہن کی شادی کی پیکنگ میں لاجواب نفاست کا کام تھا! حقیقی آسائش۔"',
 
     // Offerings
@@ -506,18 +497,18 @@ const translations: Record<Language, Record<string, string>> = {
     // Why Choose Us
     whyBadge: "کمال کی لگن",
     whyTitle: "خاندان ہمیں کیوں منتخب کرتے ہیں",
-    whySubtitle: "ہم صرف بیکنگ یا پیکنگ نہیں کرتے، ہم فن عیاں کرتے ہیں۔ لدھیانہ کے سب سے معزز خاندان ہمیں منتخب کرتے ہیں۔",
+    whySubtitle: "ہم صرف بیکنگ یا پیکنگ نہیں کرتے, ہم فن عیاں کرتے ہیں۔ لدھیانہ کے سب سے معزز خاندان ہمیں منتخب کرتے ہیں۔",
     whyCard1Title: "100% خالص سبزی خور",
     whyCard1Desc: "مکمل طور پر تصدیق شدہ بغیر انڈے کا کچن جو روایتی خاندانی اقدار کا احترام کرتا ہے۔",
     whyCard2Title: "منفرد ڈیزائن کی کہانی",
     whyCard2Desc: "کوئی پرانا طریقہ نہیں۔ ہم آپ کے لباس، رنگوں اور تھیم کے مطابق سب کچھ تیار کرتے ہیں۔",
     whyCard3Title: "عمدہ ترین اشیاء",
-    whyCard3Desc: "خالص بیلجین چاکلیٹ، تازہ ونیلا بین اور خالص ڈیری کریم کا خاص استعمال۔",
+    whyCard3Desc: "خالص بیلجین چاکلیٹ، تازہ ونیلا بین اور خالص ڈیری کریم کا خاص استعمال।",
     whyCard4Title: "شاہانہ جمالیات",
     whyCard4Desc: "مخملی ہیمپرز سے لے کر ایکریلک ٹرے تک، ہماری سجاوٹ شاہانہ پن کی علامت ہے۔",
 
     // Gallery / Instagram
-    galleryBadge: "انسٹاگرام لائیو لک بک",
+    galleryBadge: "انسٹاگرام لک بک",
     galleryTitle: "ہماری تصویری ڈائری",
     gallerySubtitle: "ہمارے اسٹوڈیو سے نکلتی شاندار تخلیقات دیکھیں۔ لدھیانہ سے لائیو اپ ڈیٹس دیکھیں۔",
     galleryLikes: "پسندیدگیاں",
@@ -528,7 +519,7 @@ const translations: Record<Language, Record<string, string>> = {
     testimonialsTitle: "ہمارے ذائقوں کے شیدائی",
     testimonialsSubtitle: "لدھیانہ کے ان معزز خاندانوں کے تبصرے پڑھیں جو خوشیوں کے موقع پر ہم پر اعتبار کرتے ہیں۔",
     testimonialsNext: "اگلا",
-    testimonialsPrev: "پچھلا",
+    testimonialsPrev: "اگلا پچھلا",
 
     // Order Process
     processBadge: "طریقہ کار",
@@ -541,28 +532,30 @@ const translations: Record<Language, Record<string, string>> = {
     processStep3Title: "ہاتھوں سے تیاری",
     processStep3Desc: "ہمارے اسٹوڈیو میں نفاست اور حفظان صحت کے اصولوں کے تحت آرڈر تیار کیا جاتا ہے۔",
     processStep4Title: "محفوظ ڈلیوری اور پک اپ",
-    processStep4Desc: "ہمارے لدھیانہ اسٹوڈیو سے کیک وصول کریں یا ہوم ڈلیوری سروس کا لطف اٹھائیں۔",
+    processStep4Desc: "ہمارے لدھیانہ اسٹوڈیو سے کیک وصول کریں یا ہوم ڈलीوری کا لطف اٹھائیں۔",
 
     // Order Form
-    formBadge: "انٹرایکٹو بلڈر",
-    formTitle: "تفصیلات درج کریں",
-    formSubtitle: "وزن، ذائقہ اور تاریخ منتخب کریں اور ہماری واٹس ایپ ٹیم کو انکوائری ڈرافٹ بھیجیں۔",
-    formCategoryLabel: "پیکج کیٹیگری",
-    formThemeLabel: "تھیم اور رنگوں کی ترجیح",
-    formThemePlaceholder: "اپنے تھیم کی وضاحت کریں، جیسے مخمل گلابی، چاکلیٹ اوورلوڈ، سنہری پیکنگ...",
-    formFlavorLabel: "ذائقہ (کیک اور کوکیز کے لیے)",
-    formWeightQtyLabel: "کیک کا وزن یا پیکیج کی تعداد",
-    formDateLabel: "مطلوبہ تاریخ",
-    formSpecialMsgLabel: "خصوصی پیغام یا پیکنگ نوٹ",
-    formSpecialMsgPlaceholder: "کیک پر لکھی جانے والی تحریر یا تحفہ ٹوکری کی خاص اشیاء...",
-    formSelectTrousseauLabel: "ٹرے کا مٹیریل (مخمل/لکڑی)",
-    formSendWaBtn: "واٹس ایپ انکوائری بھیجیں",
-    formSuccessMsg: "واٹس ایپ پیغام ڈرافٹ کیا جا رہا ہے...",
+    orderBadge: "انٹرایکٹو بلڈر",
+    orderTitle: "تفصیلات درج کریں",
+    orderSubtitle: "وزن، ذائقہ اور تاریخ منتخب کریں اور ہماری واٹس ایپ ٹیم کو انکوائری ڈرافٹ بھیجیں۔",
+    orderStepTitle: "آرڈر فارم کی معلومات",
+    orderSelectCatLabel: "پیکج کیٹیگری",
+    orderOccasionLabel: "تھیم اور رنگوں کی ترجیح",
+    orderOccasionPlaceholder: "اپنے تھیم کی وضاحت کریں، جیسے مخمل گلابی، چاکلیٹ اوورلوڈ، سنہری پیکنگ...",
+    orderEgglessFlavorLabel: "ذائقہ (کیک اور کوکیز کے لیے)",
+    orderWeightLabel: "کیک کا وزن یا پیکیج की تعداد",
+    orderPackingStyleLabel: "ٹرے کا مٹیریل (مخمل/لکڑی)",
+    orderQtyLabel: "کیک کا وزن یا پیکیج की تعداد",
+    orderRequiredDateLabel: "مطلوبہ تاریخ",
+    orderRequiredDateNote: "آرڈر کم از کم 24 سے 48 گھنٹے پہلے دیں۔",
+    orderMessageOnCakeLabel: "خصوصی پیغام یا پیکنگ نوٹ",
+    orderLiveBoardTitle: "لائیو بلنگ معلومات",
+    orderSendWaBtn: "واٹس ایپ انکوائری بھیجیں",
 
     // Contact Us / Location
     contactBadge: "رابطہ اور آمد",
     contactTitle: "ہمارے کسٹم اسٹوڈیو سے ملیں",
-    contactSubtitle: "لدھیانہ کے قلب میں واقع، خوبصورت ترین کسٹم پیکیجنگ اور مٹھاس صرف ایک کال کی دوری پر۔",
+    contactSubtitle: "لدھیانہ کے قلب میں واقع، خوبصورت ترین کسٹم پیکیجنگ اور مٹھاس صرف ایک کال کی دूरी پر۔",
     contactCardStudioTitle: "ڈیزائن اسٹوڈیو",
     contactCardStudioDesc: "لدھیانہ ماڈل ٹاؤن / کینال روڈ، پنجاب، انڈیا",
     contactCardCallTitle: "شیف سے مشورہ کریں",
@@ -584,7 +577,7 @@ const translations: Record<Language, Record<string, string>> = {
     bulletFresh: "تازہ ترین بیکنگ کی ضمانت",
 
     itemGiftHampersTitle: "🎁 گفٹ ہیمپرز",
-    itemGiftHampersDesc: "ایک لاجواب تجربہ دیں! خوبصورت ٹوکریوں میں ہاتھ کے بنے بسکٹ، چاکلیٹ اور پھول سجائے جاتے ہیں۔",
+    itemGiftHampersDesc: "ایک لاविचार تجربہ دیں! خوبصورت ٹوکریوں میں ہاتھ کے بنے بسکٹ، چاکلیٹ اور پھول سجائے جاتے ہیں۔",
     bulletWoodBasket: "پریمیم لکڑی/مخمل کی ٹوکریاں",
     bulletHandmades: "صرف ہینڈ میڈ مصنوعات",
     bulletBulkOptions: "تہواروں کے لیے بلک آرڈر آپشن",
@@ -601,43 +594,4 @@ const translations: Record<Language, Record<string, string>> = {
     bulletAcrylic: "ایکریکلک اور پھولوں کے شاندار کور",
     bulletBridalMatch: "دلہن کے لہنگے سے ہم آہنگ خوبصورت پیکنگ"
   }
-};
-
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(() => {
-    const saved = localStorage.getItem("homebakers_lang");
-    return (saved as Language) || "en";
-  });
-
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    localStorage.setItem("homebakers_lang", lang);
-  };
-
-  const t = (key: string): string => {
-    return translations[language][key] || translations["en"][key] || key;
-  };
-
-  const isRtl = language === "ur";
-
-  useEffect(() => {
-    document.documentElement.dir = isRtl ? "rtl" : "ltr";
-    document.documentElement.lang = language;
-  }, [language, isRtl]);
-
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, isRtl }}>
-      <div className={isRtl ? "font-serif text-right" : "font-sans"}>
-        {children}
-      </div>
-    </LanguageContext.Provider>
-  );
-};
-
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
-  }
-  return context;
 };
