@@ -1,0 +1,6 @@
+{
+  "name": "Home Baker's Website",
+  "description": "Elegant web catalog showcase for Home Baker's in Ludhiana, Punjab, featuring 100% eggless cakes, hampers, return gifts, and trousseau packing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

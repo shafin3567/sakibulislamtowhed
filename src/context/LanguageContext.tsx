@@ -1,0 +1,643 @@
+import React, { createContext, useContext, useState, useEffect } from "react";
+
+export type Language = "en" | "pa" | "hi" | "ur";
+
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+  isRtl: boolean;
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+const translations: Record<Language, Record<string, string>> = {
+  en: {
+    // Announcement & Navigation
+    announcement: "✨ 100% Eggless Cakes & Exclusive Premium Hampers in Ludhiana ✨",
+    logoSubtitle: "LUDHIANA • ESTABLISHED QUALITY",
+    callUs: "Call Us",
+    waOrder: "WhatsApp Order",
+    navHome: "Home",
+    navAbout: "About Us",
+    navOfferings: "Our Offerings",
+    navWhyUs: "Why Choose Us",
+    navGallery: "Gallery",
+    navReviews: "Reviews",
+    navProcess: "Order Process",
+    navContact: "Contact",
+    callNow: "Call Now",
+    waInquiry: "WhatsApp Inquiry",
+
+    // Hero Section
+    heroBadge: "👑 Ludhiana's Premier Bespoke Baker",
+    heroTitlePart1: "Indulge in Luxe,",
+    heroTitlePart2: "100% Eggless Creations",
+    heroSubtitle: "Handcrafted cakes, custom festival gift hampers, gorgeous return favors, and high-end trousseau wrapping styled to perfection right here in Ludhiana.",
+    heroBtnExplore: "Explore Our Offerings",
+    heroBtnInquiry: "Build Custom Cake",
+    heroRatingTitle: "Ludhiana Local Family",
+    heroRatingQuote: '"Beautiful cake and amazing taste. Highlights of our party!"',
+
+    // About Us
+    aboutBadge: "Our Heritage Story",
+    aboutTitle: "Baking Love and Crafting Memories in Ludhiana",
+    aboutText1: "From humble ovens to Ludhiana's top bespoke design service, our journey is rooted in absolute quality, 100% eggless purity, and custom premium aesthetics that elevate your special celebrations into fine-art memories.",
+    aboutText2: "Every cake is custom-baked. Every gift hamper, return favor box, and trousseau tray is meticulously hand-decorated to match your theme, representing pure elegance and luxury.",
+    aboutStatsYears: "Years Baking",
+    aboutStatsEggless: "100% Pure Eggless",
+    aboutStatsDesigns: "Theme Variations",
+    aboutQuote: '"Loved the attention to details for my sister\'s wedding packing! Pure luxury."',
+
+    // Offerings
+    catalogBadge: "Our Specialty Catalog",
+    catalogTitle: "Featured Offerings",
+    catalogSubtitle: "Every creation is bespoke, 100% vegetarian (eggless), and designed with utmost aesthetic brilliance. Click any category to pre-load it into our custom inquiry builder.",
+    catalogPremiumLudhiana: "Premium Ludhiana Service",
+    catalogCustomizeBtn: "Customize & Place Inquiry",
+    catalogBrochureBtn: "WhatsApp Brochure",
+    catalogShareTitle: "Share this catalog item:",
+    catalogShareCopied: "Copied Link!",
+    catalogShareCopyBtn: "Copy Link",
+    catalogShareWaBtn: "Share",
+
+    // Why Choose Us
+    whyBadge: "The Art of Perfection",
+    whyTitle: "Why Connoisseurs Choose Us",
+    whySubtitle: "We do not just bake or pack; we sculpt aesthetic experiences. Here is why the most refined families in Ludhiana choose our workshop.",
+    whyCard1Title: "100% Pure Vegetarian",
+    whyCard1Desc: "Completely certified eggless facility ensuring kitchen-pure compliance with traditional family standards.",
+    whyCard2Title: "Bespoke Design Story",
+    whyCard2Desc: "No template lookalikes. We design everything explicitly around your color palettes, outfits, or custom themes.",
+    whyCard3Title: "Premium Ingredients",
+    whyCard3Desc: "Pure Belgian chocolates, fresh vanilla bean pods, rich dairy creams and no artificial shortcuts.",
+    whyCard4Title: "Elegant Artistry",
+    whyCard4Desc: "From luxury velvet hampers to acrylic-topped lace-lined trousseau trays, our setups represent custom royalty.",
+
+    // Gallery / Instagram
+    galleryBadge: "Live Instagram Lookbook",
+    galleryTitle: "Our Visual Diary",
+    gallerySubtitle: "Witness the exquisite creations leaving our kitchen or studio. Check our fresh updates and real-time celebratory posts right from Ludhiana.",
+    galleryLikes: "Likes",
+    galleryComments: "Comments",
+
+    // Testimonials
+    testimonialsBadge: "Word of Mouth",
+    testimonialsTitle: "In Love With Our Sweet Delights",
+    testimonialsSubtitle: "Read reviews from families and corporate partners across Ludhiana who trust us for their most joyous lifetime landmarks.",
+    testimonialsNext: "Next Review",
+    testimonialsPrev: "Previous Review",
+
+    // Order Process
+    processBadge: "How It Works",
+    processTitle: "Our Ordering Experience",
+    processSubtitle: "Getting your dream eggless creation or premium packaging is designed to be completely flawless, highly detailed, and transparent.",
+    processStep1Title: "Select & Share Detail",
+    processStep1Desc: "Pick your category and customized specifications. Click submit to send it as a dedicated inquiry.",
+    processStep2Title: "Direct Consultation",
+    processStep2Desc: "We chat directly over WhatsApp of call to finalize flavors, color palettes, and weight details.",
+    processStep3Title: "Bespoke Production",
+    processStep3Desc: "Our kitchen/studio crafts your custom design fresh with top-grade, kitchen-hygiene certified ingredients.",
+    processStep4Title: "Secure Collection/Delivery",
+    processStep4Desc: "Pick up your cake box or customized trousseau safely from our Ludhiana studio or enjoy luxury transit.",
+
+    // Order Form
+    formBadge: "Interactive Inquirer",
+    formTitle: "Build Creative Inquiry",
+    formSubtitle: "Adjust sliders, select flavor profiles, dates, and send a customized draft instantly to our WhatsApp team for pricing and confirmations.",
+    formCategoryLabel: "Offering Category",
+    formThemeLabel: "Theme/Color Customization Requirements",
+    formThemePlaceholder: "Describe your theme, e.g., Pastel Mint Green, Chocolate Overload, Golden Trousseau...",
+    formFlavorLabel: "Flavor Profile (For Cakes/Cookies)",
+    formWeightQtyLabel: "Cakes Weight OR Gift Item Qty",
+    formDateLabel: "Preferred Delivery/Pickup Date",
+    formSpecialMsgLabel: "Special Celebration Message or Packaging Note",
+    formSpecialMsgPlaceholder: "Write any text to go on the cake, or specific items you'd love inside hampers...",
+    formSelectTrousseauLabel: "Trousseau Wood/Velvet Tray Preference",
+    formSendWaBtn: "Draft WhatsApp Message & Send",
+    formSuccessMsg: "Generating customized WhatsApp outline...",
+
+    // Contact Us / Location
+    contactBadge: "Visit Or Call Us",
+    contactTitle: "Reach Out To Our Studio",
+    contactSubtitle: "Located in the heart of Ludhiana, sweet custom perfection is just a phone call or quick message away.",
+    contactCardStudioTitle: "The Design Studio",
+    contactCardStudioDesc: "Ludhiana Model Town / Canal Area Road, Punjab, India",
+    contactCardCallTitle: "Talk With Our Chef",
+    contactCardCallDesc: "Available daily for design call consultations.",
+    contactCardHoursTitle: "Studio Timings",
+    contactCardHoursDesc: "10:00 AM – 9:00 PM (Monday - Sunday)",
+
+    // Footer
+    footerSlogan: "Crafting beautiful 100% eggless cakes, customizable hampers and luxury trousseau wrap designs in Ludhiana, Punjab.",
+    footerLinksHeader: "Quick Sections",
+    footerContactHeader: "Direct Inquiry",
+    footerRights: "Home Baker's Ludhiana. All design rights reserved.",
+    footerDevTag: "Baking quality with pure eggless traditions.",
+    
+    // Product Items
+    itemCustomCakesTitle: "🎂 Custom Cakes",
+    itemCustomCakesDesc: "Our signature 100% eggless cakes are baked fresh with premium ingredients, fluffy sponge layers, and delicious buttercreams custom styled for your party.",
+    bulletEggless: "100% Eggless Certified",
+    bulletCustomized: "Custom Customizations",
+    bulletFresh: "Always Baked Fresh to Order",
+    
+    itemGiftHampersTitle: "🎁 Gift Hampers",
+    itemGiftHampersDesc: "Gift an experience! Beautifully arranged baskets populated with handcrafted cookies, sweet bites, themed prints, and premium floral accents.",
+    bulletWoodBasket: "Premium Wood/Velvet Baskets",
+    bulletHandmades: "Handmades Only",
+    bulletBulkOptions: "Bulk Options for Teams/Festivals",
+
+    itemReturnGiftsTitle: "🎀 Return Gifts",
+    itemReturnGiftsDesc: "Delight your party guests on departure. From child birthdays to high-end baby showers, we build souvenirs that symbolize warm remembrance.",
+    bulletLabels: "Personalized Custom Labels",
+    bulletChildSafe: "Child-Safe & Food-Safe Items",
+    bulletBoxVariety: "Variety of Boxes/Sacks available",
+
+    itemTrousseauTitle: "💝 Trousseau Packing",
+    itemTrousseauDesc: "Let your wedding gifts reflect ultimate elegance. Our premium trousseau wrapping turns sarees, jewelry, and favors into masterpiece displays.",
+    bulletTrays: "Suede/Velvet Trays",
+    bulletAcrylic: "Acrylic/Floral Decorative Top Covers",
+    bulletBridalMatch: "Color-coordinated layouts matching bridal lehengas"
+  },
+  pa: {
+    // Announcement & Navigation
+    announcement: "✨ ਲੁਧਿਆਣਾ ਵਿੱਚ 100% ਬਿਨਾਂ ਅੰਡੇ ਵਾਲੇ ਕੇਕ ਅਤੇ ਵਿਸ਼ੇਸ਼ ਪ੍ਰੀਮੀਅਮ ਹੈਂਪਰ ✨",
+    logoSubtitle: "ਲੁਧਿਆਣਾ • ਸਥਾਪਿਤ ਗੁਣਵੱਤਾ",
+    callUs: "ਕਾਲ ਕਰੋ",
+    waOrder: "ਵਟਸਐਪ ਆਰਡਰ",
+    navHome: "ਘਰ",
+    navAbout: "ਸਾਡੇ ਬਾਰੇ",
+    navOfferings: "ਸਾਡੀਆਂ ਪੇਸ਼ਕਸ਼ਾਂ",
+    navWhyUs: "ਸਾਨੂੰ ਕਿਉਂ ਚੁਣੋ",
+    navGallery: "ਗੈਲਰੀ",
+    navReviews: "ਸਮੀਖਿਆਵਾਂ",
+    navProcess: "ਆਰਡਰ ਪ੍ਰਕਿਰਿਆ",
+    navContact: "ਸੰਪਰਕ",
+    callNow: "ਹੁਣੇ ਕਾਲ ਕਰੋ",
+    waInquiry: "ਵਟਸਐਪ ਪੁੱਛਗਿੱਛ",
+
+    // Hero Section
+    heroBadge: "👑 ਲੁਧਿਆਣਾ ਦਾ ਪ੍ਰਮੁੱਖ ਰਿਵਾਇਤੀ ਬੇਕਰ",
+    heroTitlePart1: "ਲਗਜ਼ਰੀ,",
+    heroTitlePart2: "100% ਅੰਡੇ-ਰਹਿਤ ਰਚਨਾਵਾਂ",
+    heroSubtitle: "ਲੁਧਿਆਣਾ ਵਿੱਚ ਤੁਹਾਡੀ ਪਸੰਦ ਦੇ ਮੁਤਾਬਕ ਤਿਆਰ ਕੀਤੇ ਗਏ ਕੇਕ, ਤਿਉਹਾਰਾਂ ਦੇ ਵਿਸ਼ੇਸ਼ ਤੋਹਫ਼ੇ ਵਾਲੇ ਹੈਂਪਰ, ਸ਼ਾਨਦਾਰ ਰਿਟਰਨ ਗਿਫਟ ਅਤੇ ਵਿਆਹਾਂ ਦੀ ਪੈਕਿੰਗ।",
+    heroBtnExplore: "ਸਾਡੀਆਂ ਪੇਸ਼ਕਸ਼ਾਂ ਦੇਖੋ",
+    heroBtnInquiry: "ਕਸਟਮ ਕੇਕ ਬਣਾਓ",
+    heroRatingTitle: "ਲੁਧਿਆਣਾ ਲੋਕਲ ਫੈਮਿਲੀ",
+    heroRatingQuote: '"ਬਹੁਤ ਹੀ ਖੂਬਸੂਰਤ ਕੇਕ ਅਤੇ ਸ਼ਾਨਦਾਰ ਸੁਆਦ। ਸਾਡੀ ਪਾਰਟੀ ਦਾ ਮੁੱਖ ਆਕਰਸ਼ਣ!"',
+
+    // About Us
+    aboutBadge: "ਸਾਡੀ ਵਿਰਾਸਤ ਦੀ ਕਹਾਣੀ",
+    aboutTitle: "ਲੁਧਿਆਣਾ ਵਿੱਚ ਬੇਕਿੰਗ ਪਿਆਰ ਅਤੇ ਪਿਆਰੀਆਂ ਯਾਦਾਂ",
+    aboutText1: "ਸਧਾਰਨ ਓਵਨ ਤੋਂ ਲੈ ਕੇ ਲੁਧਿਆਣਾ ਦੀ ਪ੍ਰਮੁੱਖ ਡਿਜ਼ਾਈਨਰ ਕੇਕ ਸਰਵਿਸ ਤੱਕ, ਸਾਡਾ ਸਫ਼ਰ ਪੂਰੀ ਗੁਣਵੱਤਾ, 100% ਸ਼ਾਕਾਹਾਰੀ ਸ਼ੁੱਧਤਾ ਅਤੇ ਪ੍ਰੀਮੀਅਮ ਡਿਜ਼ਾਈਨਾਂ 'ਤੇ ਅਧਾਰਤ ਹੈ।",
+    aboutText2: "ਹਰ ਕੇਕ ਤਾਜ਼ਾ ਬੇਕ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਹਰ ਤੋਹਫ਼ੇ ਦਾ ਡੱਬਾ ਅਤੇ ਥਾਲੀ ਤੁਹਾਡੇ ਥੀਮ ਦੇ ਅਨੁਸਾਰ ਸਜਾਈ ਜਾਂਦੀ ਹੈ ਜੋ ਸ਼ਾਹੀ ਦਿੱਖ ਦਿੰਦੀ ਹੈ।",
+    aboutStatsYears: "ਸਾਲਾਂ ਦਾ ਤਜਰਬਾ",
+    aboutStatsEggless: "100% ਸ਼ੁੱਧ ਸ਼ਾਕਾਹਾਰੀ",
+    aboutStatsDesigns: "ਥੀਮ ਡਿਜ਼ਾਈਨ",
+    aboutQuote: '"ਮੇਰੀ ਭੈਣ ਦੇ ਵਿਆਹ ਦੀ ਪੈਕਿੰਗ ਵਿੱਚ ਬਹੁਤ ਹੀ ਹੁਸ਼ਿਆਰੀ ਨਾਲ ਕੰਮ ਕੀਤਾ ਗਿਆ ਸੀ! ਅਸਲ ਲਗਜ਼ਰੀ।"',
+
+    // Offerings
+    catalogBadge: "ਸਾਡਾ ਵਿਸ਼ੇਸ਼ ਕੈਟਾਲਾਗ",
+    catalogTitle: "ਖਾਸ ਪੇਸ਼ਕਸ਼ਾਂ",
+    catalogSubtitle: "ਹਰ ਰਚਨਾ 100% ਸ਼ਾਕਾਹਾਰੀ (ਬਿਨਾਂ ਅੰਡੇ) ਅਤੇ ਸ਼ਾਨਦਾਰ ਡਿਜ਼ਾਈਨ ਦੇ ਨਾਲ ਤਿਆਰ ਕੀਤੀ ਗਈ ਹੈ। ਆਰਡਰ ਬਿਲਡਰ 'ਤੇ ਜਾਣ ਲਈ ਕੈਟੇਗਰੀ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।",
+    catalogPremiumLudhiana: "ਪ੍ਰੀਮੀਅਮ ਲੁਧਿਆਣਾ ਸੇਵਾ",
+    catalogCustomizeBtn: "ਕਸਟਮਾਈਜ਼ ਅਤੇ ਪੁੱਛਗਿੱਛ ਕਰੋ",
+    catalogBrochureBtn: "ਵਟਸਐਪ ਬਰੋਸ਼ਰ",
+    catalogShareTitle: "ਇਸ ਕੈਟਾਲਾਗ ਨੂੰ ਸਾਂਝਾ ਕਰੋ:",
+    catalogShareCopied: "ਲਿੰਕ ਕਾਪੀ ਹੋ ਗਿਆ!",
+    catalogShareCopyBtn: "ਲਿੰਕ ਕਾਪੀ ਕਰੋ",
+    catalogShareWaBtn: "ਸ਼ੇਅਰ ਕਰੋ",
+
+    // Why Choose Us
+    whyBadge: "ਸੰਪੂਰਨਤਾ ਦੀ ਕਲਾ",
+    whyTitle: "ਸਿਆਣੇ ਪਰਿਵਾਰ ਸਾਨੂੰ ਕਿਉਂ ਚੁਣਦੇ ਹਨ",
+    whySubtitle: "ਅਸੀਂ ਸਿਰਫ ਬੇਕਿੰਗ ਜਾਂ ਪੈਕਿੰਗ ਨਹੀਂ ਕਰਦੇ, ਅਸੀਂ ਕਲਾਤਮਕ ਅਨੁਭਵ ਸਿਰਜਦੇ ਹਾਂ। ਲੁਧਿਆਣਾ ਦੇ ਸਭ ਤੋਂ ਵਧੀਆ ਪਰਿਵਾਰ ਸਾਡੀ ਚੋਣ ਕਰਦੇ ਹਨ।",
+    whyCard1Title: "100% ਸ਼ੁੱਧ ਸ਼ਾਕਾਹਾਰੀ",
+    whyCard1Desc: "ਪੂਰੀ ਤਰ੍ਹਾਂ ਪ੍ਰਮਾਣਿਤ ਅੰਡੇ-ਰਹਿਤ ਰਸੋਈ ਜੋ ਰਵਾਇਤੀ ਪਰਿਵਾਰਕ ਮਿਆਰਾਂ ਦੀ ਪਾਲਣਾ ਕਰਦੀ ਹੈ।",
+    whyCard2Title: "ਖਾਸ ਡਿਜ਼ਾਈਨ ਕਹਾਣੀ",
+    whyCard2Desc: "ਕੋਈ ਪੁਰਾਣੇ ਡਿਜ਼ਾਈਨ ਨਹੀਂ। ਅਸੀਂ ਤੁਹਾਡੇ ਕੱਪੜਿਆਂ, ਰੰਗਾਂ ਜਾਂ ਥੀਮ ਮੁਤਾਬਕ ਸਭ ਕੁਝ ਤਿਆਰ ਕਰਦੇ ਹਾਂ।",
+    whyCard3Title: "ਵਧੀਆ ਸਮੱਗਰੀ",
+    whyCard3Desc: "ਅਸਲ ਬੈਲਜੀਅਨ ਚਾਕਲੇਟ, ਤਾਜ਼ੀ ਵਨੀਲਾ ਬੀਨ ਅਤੇ ਸ਼ੁੱਧ ਡੇਅਰੀ ਕਰੀਮ ਦੀ ਵਰਤੋਂ।",
+    whyCard4Title: "ਸ਼ਾਨਦਾਰ ਕਲਾਕਾਰੀ",
+    whyCard4Desc: "ਲਗਜ਼ਰੀ ਵੈਲਵੇਟ ਹੈਂਪਰ ਤੋਂ ਲੈ ਕੇ ਐਕਰੀਲਿਕ ਟ੍ਰੇਆਂ ਤੱਕ, ਸਾਡੀ ਸਜਾਵਟ ਰਾਜਸੀ ਅਹਿਸਾਸ ਕਰਵਾਉਂਦੀ ਹੈ।",
+
+    // Gallery / Instagram
+    galleryBadge: "ਲਾਈਵ ਇੰਸਟਾਗ੍ਰਾਮ ਲੁੱਕਬੁੱਕ",
+    galleryTitle: "ਸਾਡੀ ਵਿਜ਼ੂਅਲ ਡਾਇਰੀ",
+    gallerySubtitle: "ਸਾਡੀ ਕਿਚਨ ਅਤੇ ਸਟੂਡੀਓ ਵਿੱਚੋਂ ਨਿਕਲਦੀਆਂ ਖ਼ੂਬਸੂਰਤ ਚੀਜ਼ਾਂ ਦੇ ਦਰਸ਼ਨ ਕਰੋ। ਲੁਧਿਆਣਾ ਤੋਂ ਲਾਈਵ ਅਪਡੇਟਸ ਦੇਖੋ।",
+    galleryLikes: "ਪਸੰਦ",
+    galleryComments: "ਟਿੱਪਣੀਆਂ",
+
+    // Testimonials
+    testimonialsBadge: "ਗਾਹਕਾਂ ਦੀ ਰਾਏ",
+    testimonialsTitle: "ਸਾਡੇ ਸੁਆਦੀ ਕੇਕ ਦੇ ਮੁਰੀਦ",
+    testimonialsSubtitle: "ਲੁਧਿਆਣਾ ਦੇ ਉਨ੍ਹਾਂ ਪਰਿਵਾਰਾਂ ਦੀ ਰਾਏ ਪੜ੍ਹੋ ਜੋ ਆਪਣੀਆਂ ਖੁਸ਼ੀਆਂ ਲਈ ਸਾਡੇ 'ਤੇ ਭਰੋਸਾ ਕਰਦੇ ਹਨ।",
+    testimonialsNext: "ਅਗਲਾ",
+    testimonialsPrev: "ਪਿਛਲਾ",
+
+    // Order Process
+    processBadge: "ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ",
+    processTitle: "ਆਰਡਰ ਕਰਨ ਦਾ ਅਨੁਭਵ",
+    processSubtitle: "ਤੁਹਾਡਾ ਸੁਪਨਿਆਂ ਦਾ ਕੇਕ ਜਾਂ ਪੈਕਿੰਗ ਪ੍ਰਾਪਤ ਕਰਨਾ ਬਹੁਤ ਹੀ ਆਸਾਨ, ਸਪੱਸ਼ਟ ਅਤੇ ਭਰੋਸੇਮੰਦ ਬਣਾਇਆ ਗਿਆ ਹੈ।",
+    processStep1Title: "ਚੋਣ ਅਤੇ ਪੁੱਛਗਿੱਛ",
+    processStep1Desc: "ਆਪਣੀ ਕੈਟੇਗਰੀ ਅਤੇ ਡਿਜ਼ਾਈਨ ਚੁਣੋ। ਸਬਮਿਟ ਕਰਕੇ ਸਾਨੂੰ ਪੁੱਛਗਿੱਛ ਭੇਜੋ।",
+    processStep2Title: "ਸਿੱਧੀ ਸਲਾਹ-ਮਸ਼ਵਰਾ",
+    processStep2Desc: "ਅਸੀਂ ਵਟਸਐਪ 'ਤੇ ਸਿੱਧੀ ਗੱਲ ਕਰਕੇ ਸਵਾਦ, ਰੰਗ ਅਤੇ ਵਜ਼ਨ ਫਾਈਨਲ ਕਰਦੇ ਹਾਂ।",
+    processStep3Title: "ਹੱਥੀਂ ਉਤਪਾਦਨ",
+    processStep3Desc: "ਸਾਡੇ ਸਟੂਡੀਓ ਵਿੱਚ ਉੱਚ ਗੁਣਵੱਤਾ ਅਤੇ ਸਫਾਈ ਨਾਲ ਤੁਹਾਡਾ ਆਰਡਰ ਤਿਆਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।",
+    processStep4Title: "ਸੁਰੱਖਿਅਤ ਡਿਲੀਵਰੀ/ਪਿਕਅੱਪ",
+    processStep4Desc: "ਲੁਧਿਆਣਾ ਸਟੂਡੀਓ ਤੋਂ ਆਪਣਾ ਕੇਕ ਲਓ ਜਾਂ ਸ਼ਾਹੀ ਡਿਲੀਵਰੀ ਦਾ ਆਨੰਦ ਲਓ।",
+
+    // Order Form
+    formBadge: "ਆਰਡਰ ਬਿਲਡਰ",
+    formTitle: "ਪੁੱਛਗਿੱਛ ਤਿਆਰ ਕਰੋ",
+    formSubtitle: "ਡਿਜ਼ਾਈਨ, ਫਲੇਵਰ, ਮਿਤੀ ਸੈੱਟ ਕਰੋ ਅਤੇ ਵਟਸਐਪ 'ਤੇ ਸਾਡੀ ਟੀਮ ਨਾਲ ਸਿੱਧੀ ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕਰੋ।",
+    formCategoryLabel: "ਆਫਰਿੰਗ ਕੈਟੇਗਰੀ",
+    formThemeLabel: "ਥੀਮ/ਰੰਗ ਦੀਆਂ ਲੋੜਾਂ",
+    formThemePlaceholder: "ਆਪਣੇ ਮਨਪਸੰਦ ਰੰਗ ਜਾਂ ਥੀਮ ਦਾ ਵੇਰਵਾ ਦਿਓ, ਜਿਵੇਂ ਕਿ ਚਾਕਲੇਟ, ਪੇਸਟਲ ਗ੍ਰੀਨ...",
+    formFlavorLabel: "ਫਲੇਵਰ ਪ੍ਰੋਫਾਈਲ (ਕੇਕ/ਕੂਕੀਜ਼ ਲਈ)",
+    formWeightQtyLabel: "ਕੇਕ ਦਾ ਭਾਰ ਜਾਂ ਚੀਜ਼ਾਂ ਦੀ ਗਿਣਤੀ",
+    formDateLabel: "ਡਿਲੀਵਰੀ/ਪਿਕਅੱਪ ਦੀ ਮਿਤੀ",
+    formSpecialMsgLabel: "ਵਿਸ਼ੇਸ਼ ਸੰਦੇਸ਼ ਜਾਂ ਪੈਕਿੰਗ ਨੋਟ",
+    formSpecialMsgPlaceholder: "ਕੇਕ 'ਤੇ ਲਿਖਿਆ ਜਾਣ ਵਾਲਾ ਨਾਮ ਜਾਂ ਹੈਂਪਰ ਦੀਆਂ ਖਾਸ ਚੀਜ਼ਾਂ...",
+    formSelectTrousseauLabel: "ਟਰੂਸੋ ਟ੍ਰੇਅ (ਲੱਕੜ/ਵੈਲਵੇਟ) ਦੀ ਤਰਜੀਹ",
+    formSendWaBtn: "ਵਟਸਐਪ 'ਤੇ ਪੁੱਛਗਿੱਛ ਭੇਜੋ",
+    formSuccessMsg: "ਵਟਸਐਪ ਮੈਸੇਜ ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+
+    // Contact Us / Location
+    contactBadge: "ਮੁਲਾਕਾਤ ਜਾਂ ਕਾਲ ਕਰੋ",
+    contactTitle: "ਸਾਡੇ ਸਟੂਡੀਓ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+    contactSubtitle: "ਲੁਧਿਆਣਾ ਦੇ ਕੇਂਦਰ ਵਿੱਚ ਸਥਿਤ, ਸਵਾਦਲਾ ਅਤੇ ਖੂਬਸੂਰਤ ਅਨੁਭਵ ਸਿਰਫ ਇੱਕ ਕਾਲ ਦੂਰ ਹੈ।",
+    contactCardStudioTitle: "ਡਿਜ਼ਾਈਨ ਸਟੂਡੀਓ",
+    contactCardStudioDesc: "ਲੁਧਿਆਣਾ ਮਾਡਲ ਟਾਊਨ / ਕੈਨਾਲ ਰੋਡ, ਪੰਜਾਬ, ਭਾਰਤ",
+    contactCardCallTitle: "ਸ਼ੈੱਫ ਨਾਲ ਗੱਲ ਕਰੋ",
+    contactCardCallDesc: "ਹਰ ਰੋਜ਼ ਡਿਜ਼ਾਈਨ ਸਲਾਹ-ਮਸ਼ਵਰੇ ਲਈ ਉਪਲਬਧ।",
+    contactCardHoursTitle: "ਸਟੂਡੀਓ ਦਾ ਸਮਾਂ",
+    contactCardHoursDesc: "ਸਵੇਰੇ 10:00 - ਰਾਤ 9:00 ਵਜੇ (ਸੋਮਵਾਰ - ਐਤਵਾਰ)",
+
+    // Footer
+    footerSlogan: "ਲੁਧਿਆਣਾ ਵਿੱਚ ਸ਼ਾਨਦਾਰ 100% ਅੰਡੇ-ਰਹਿਤ ਕੇਕ, ਹੈਂਪਰ ਅਤੇ ਲਗਜ਼ਰੀ ਵਿਆਹ ਪੈਕਿੰਗ ਤਿਆਰ ਕਰਨਾ।",
+    footerLinksHeader: "ਕੁਇੱਕ ਲਿੰਕ",
+    footerContactHeader: "ਸਿੱਧੀ ਪੁੱਛਗਿੱਛ",
+    footerRights: "ਹੋਮ ਬੇਕਰਜ਼ ਲੁਧਿਆਣਾ। ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ।",
+    footerDevTag: "ਪੂਰੀ ਸ਼ਾਕਾਹਾਰੀ ਗੁਣਵੱਤਾ ਅਤੇ ਪਰੰਪਰਾ।",
+
+    itemCustomCakesTitle: "🎂 ਕਸਟਮ ਕੇਕ",
+    itemCustomCakesDesc: "ਸਾਡੇ 100% ਅੰਡੇ-ਰਹਿਤ ਕੇਕ ਤਾਜ਼ੇ ਅਤੇ ਨਿਰੋਲ ਚੰਗੀ ਸਮੱਗਰੀ ਨਾਲ ਬਣਾਏ ਜਾਂਦੇ ਹਨ ਜੋ ਤੁਹਾਡੀ ਪਾਰਟੀ ਲਈ ਖਾਸ ਹਨ।",
+    bulletEggless: "100% ਅੰਡੇ-ਰਹਿਤ ਪ੍ਰਮਾਣਿਤ",
+    bulletCustomized: "ਖਾਸ ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ",
+    bulletFresh: "ਹਮੇਸ਼ਾ ਤਾਜ਼ਾ ਬੇਕ ਕੀਤਾ ਹੋਇਆ",
+
+    itemGiftHampersTitle: "🎁 ਤੋਹਫ਼ੇ ਵਾਲੇ ਹੈਂਪਰ",
+    itemGiftHampersDesc: "ਬਹੁਤ ਹੀ ਖੂਬਸੂਰਤ ਟੋਕਰੀਆਂ ਜਿਨ੍ਹਾਂ ਵਿੱਚ ਘਰ ਦੇ ਬਣੇ ਬਿਸਕੁਟ, ਚਾਕਲੇਟ ਅਤੇ ਫੁੱਲ ਸਜਾਏ ਜਾਂਦੇ ਹਨ।",
+    bulletWoodBasket: "ਲੱਕੜ/ਵੈਲਵੇਟ ਦੀਆਂ ਟੋਕਰੀਆਂ",
+    bulletHandmades: "ਸਿਰਫ ਹੱਥੀਂ ਬਣੇ ਉਤਪਾਦ",
+    bulletBulkOptions: "ਤਿਉਹਾਰਾਂ ਅਤੇ ਕੰਪਨੀਆਂ ਲਈ ਬਲਕ ਆਪਸ਼ਨ",
+
+    itemReturnGiftsTitle: "🎀 ਰਿਟਰਨ ਗਿਫਟ",
+    itemReturnGiftsDesc: "ਪਾਰਟੀ ਦੇ ਮਹਿਮਾਨਾਂ ਨੂੰ ਦੇਣ ਲਈ ਸ਼ਾਨਦਾਰ ਚੀਜ਼ਾਂ ਜੋ ਹਮੇਸ਼ਾ ਪਿਆਰ ਦੀ ਯਾਦ ਦਿਵਾਉਂਦੀਆਂ ਰਹਿਣਗੀਆਂ।",
+    bulletLabels: "ਵੈਕਤੀਗਤ ਕਸਟਮ ਲੇਬਲ",
+    bulletChildSafe: "ਬੱਚਿਆਂ ਲਈ ਸੁਰੱਖਿਅਤ ਅਤੇ ਸਾਫ਼ ਚੀਜ਼ਾਂ",
+    bulletBoxVariety: "ਵੱਖ-ਵੱਖ ਡੱਬੇ ਅਤੇ ਥੈਲੇ ਉਪਲਬਧ",
+
+    itemTrousseauTitle: "💝 ਟਰੂਸੋ ਪੈਕਿੰਗ",
+    itemTrousseauDesc: "ਵਿਆਹ ਦੇ ਤੋਹਫ਼ਿਆਂ ਨੂੰ ਸ਼ਾਹੀ ਦਿੱਖ ਦਿਓ। ਸਾਡੀ ਪ੍ਰੀਮੀਅਮ ਪੈਕਿੰਗ ਹਰ ਚੀਜ਼ ਨੂੰ ਬੇਮਿਸਾਲ ਬਣਾਉਂਦੀ ਹੈ।",
+    bulletTrays: "ਸੂਈਡ/ਵੈਲਵੇਟ ਦੀਆਂ ਟ੍ਰੇਆਂ",
+    bulletAcrylic: "ਐਕਰੀਲਿਕ/ਫੁੱਲਾਂ ਵਾਲੇ ਸ਼ਾਨਦਾਰ ਕਵਰ",
+    bulletBridalMatch: "ਲਹਿੰਗੇ ਦੇ ਰੰਗ ਨਾਲ ਮੇਲ ਖਾਂਦੀਆਂ ਸਜਾਵਟਾਂ"
+  },
+  hi: {
+    // Announcement & Navigation
+    announcement: "✨ लुधियाना में 100% बिना अंडे वाले केक और विशेष प्रीमियम हैंपर्स ✨",
+    logoSubtitle: "लुधियाना • स्थापित गुणवत्ता",
+    callUs: "कॉल करें",
+    waOrder: "व्हाट्सएप ऑर्डर",
+    navHome: "होम",
+    navAbout: "हमारे बारे में",
+    navOfferings: "हमारी पेशकश",
+    navWhyUs: "हमें क्यों चुनें",
+    navGallery: "गैलरी",
+    navReviews: "समीक्षाएं",
+    navProcess: "ऑर्डर प्रक्रिया",
+    navContact: "संपर्क",
+    callNow: "अभी कॉल करें",
+    waInquiry: "व्हाट्सएप पूछताछ",
+
+    // Hero Section
+    heroBadge: "👑 लुधियाना का प्रमुख बेस्पोक बेकर",
+    heroTitlePart1: "शाही स्वाद,",
+    heroTitlePart2: "100% अंडा-रहित क्रिएशंस",
+    heroSubtitle: "लुधियाना में विशेष रूप से डिजाइन किए गए केक, शानदार उपहार हैंपर्स, भव्य रिटर्न गिफ्ट और शादियों की शानदार पैकिंग सेवा।",
+    heroBtnExplore: "हमारी पेशकश देखें",
+    heroBtnInquiry: "कस्टम केक बनाएं",
+    heroRatingTitle: "लुधियाना लोकल फैमिली",
+    heroRatingQuote: '"बहुत ही सुंदर केक और लाजवाब स्वाद। हमारी पार्टी की जान!"',
+
+    // About Us
+    aboutBadge: "हमारी गौरवमयी कहानी",
+    aboutTitle: "लुधियाना में प्यार और खूबसूरत यादें संजोना",
+    aboutText1: "साधारण ओवन से शुरुआत कर लुधियाना की सर्वश्रेष्ठ डिजाइनर केक सर्विस तक, हमारा सफर गुणवत्ता, 100% शाकाहारी शुद्धता और प्रीमियम सौंदर्य पर आधारित है।",
+    aboutText2: "हर केक ताजा बेक किया जाता है। प्रत्येक उपहार टोकरी और ट्रे को बेहद करीने से आपके थीम के अनुसार सजाया जाता है जो शाही एहसास कराती है।",
+    aboutStatsYears: "वर्षों का अनुभव",
+    aboutStatsEggless: "100% शुद्ध शाकाहारी",
+    aboutStatsDesigns: "थीम डिज़ाइन्स",
+    aboutQuote: '"मेरी बहन की शादी की पैकिंग में अद्भुत बारीकियों का काम किया गया था! असली विलासिता।"',
+
+    // Offerings
+    catalogBadge: "हमारा विशेष कैटलॉग",
+    catalogTitle: "प्रमुख पेशकश",
+    catalogSubtitle: "हर क्रिएशन 100% शाकाहारी (बिना अंडे की) और शानदार डिजाइन से बनी है। ऑर्डर अनुकूलन के लिए किसी भी कैटेगरी पर क्लिक करें।",
+    catalogPremiumLudhiana: "प्रीमियम लुधियाना सेवा",
+    catalogCustomizeBtn: "अनुकूलित करें और पूछताछ करें",
+    catalogBrochureBtn: "व्हाट्सएप ब्रोशर",
+    catalogShareTitle: "यह कैटलॉग साझा करें:",
+    catalogShareCopied: "लिंक कॉपी हो गया!",
+    catalogShareCopyBtn: "लिंक कॉपी करें",
+    catalogShareWaBtn: "शेयर करें",
+
+    // Why Choose Us
+    whyBadge: "सच्ची कलात्मकता",
+    whyTitle: "सभ्य परिवार हमें क्यों चुनते हैं",
+    whySubtitle: "हम सिर्फ बेकिंग या पैकिंग नहीं करते, हम कलात्मकता का अनुभव कराते हैं। लुधियाना के सबसे प्रतिष्ठित परिवार हमें चुनते हैं।",
+    whyCard1Title: "100% शुद्ध शाकाहारी",
+    whyCard1Desc: "पूर्णतः प्रमाणित अंडा-रहित किचन जो पारंपरिक पारिवारिक मूल्यों का आदर करती है।",
+    whyCard2Title: "विशेष डिजाइन शैली",
+    whyCard2Desc: "कोई पुराना पैटर्न नहीं। हम आपके कपड़ों, रंगों या थीम के अनुसार सब कुछ तैयार करते हैं।",
+    whyCard3Title: "सर्वश्रेष्ठ सामग्री",
+    whyCard3Desc: "असली बेल्जियन चॉकलेट, ताज़ा वेनिला बीन और शुद्ध डेयरी क्रीम का विशेष प्रयोग।",
+    whyCard4Title: "शाही सौंदर्य",
+    whyCard4Desc: "लक्ज़री मखमली हैंपर्स से लेकर एक्रिलिक पारदर्शी ट्रे तक, हमारी सजावट सर्वोत्तम है।",
+
+    // Gallery / Instagram
+    galleryBadge: "लाइव इंस्टाग्राम लुकबुक",
+    galleryTitle: "हमारी विजुअल डायरी",
+    gallerySubtitle: "किचन और स्टूडियो से निकलती लाजवाब कलाकृतियों को देखें। लुधियाना की ताज़ा गतिविधियां यहां देखें।",
+    galleryLikes: "पसंद",
+    galleryComments: "टिप्पणियाँ",
+
+    // Testimonials
+    testimonialsBadge: "ग्राहकों की जुबानी",
+    testimonialsTitle: "हमारे मीठे स्वाद के कायल",
+    testimonialsSubtitle: "लुधियाना के उन परिवारों के विचार पढ़ें जो खुशियों के अवसरों पर हम पर विश्वास करते हैं।",
+    testimonialsNext: "अगला",
+    testimonialsPrev: "पिछला",
+
+    // Order Process
+    processBadge: "कैसे काम करता है",
+    processTitle: "आसान ऑर्डरिंग अनुभव",
+    processSubtitle: "अपनी पसंद का केक या विशेष उत्सव पैकिंग प्राप्त करना बेहद सरल, स्पष्ट और पारदर्शी है।",
+    processStep1Title: "श्रेणी और आवश्यकताएं",
+    processStep1Desc: "अपनी पसंद की कैटेगरी और डिजाइन चुनें। सबमिट कर हमें इन्क्वायरी भेजें।",
+    processStep2Title: "सीधी बातचीत",
+    processStep2Desc: "हम व्हाट्सएप पर सीधे संपर्क कर स्वाद, रंग थीम और वजन तय करते हैं।",
+    processStep3Title: "हाथों से निर्माण",
+    processStep3Desc: "हमारे स्टूडियो में पूर्ण स्वच्छता और सर्वश्रेष्ठ सामग्री के साथ आपका ऑर्डर तैयार होता है।",
+    processStep4Title: "सुरक्षित डिलीवरी/पिकअप",
+    processStep4Desc: "हमारे लुधियाना स्टूडियो से केक प्राप्त करें या विशेष डिलीवरी सेवा का आनंद लें।",
+
+    // Order Form
+    formBadge: "इंटरेक्टिव निर्माता",
+    formTitle: "पूछताछ तैयार करें",
+    formSubtitle: "वजन, फ्लेवर, डिलीवरी की तारीख चुनें और हमारी व्हाट्सएप टीम को तुरंत संदेश भेजें।",
+    formCategoryLabel: "कैटेगरी",
+    formThemeLabel: "थीम / रंग की आवश्यकताएं",
+    formThemePlaceholder: "अपनी पसंदीदा थीम बताएं, जैसे मखमली लाल, चॉकलेट ओवरलोड, स्वर्णिम पैकिंग...",
+    formFlavorLabel: "फ्लेवर प्रोफाइल (केक/कुकीज)",
+    formWeightQtyLabel: "केक का वजन या सामान की मात्रा",
+    formDateLabel: "पसंदीदा डिलीवरी/पिकअप तिथि",
+    formSpecialMsgLabel: "विशेष संदेश या पैकेजिंग नोट",
+    formSpecialMsgPlaceholder: "केक पर लिखे जाने वाला नाम या उपहार टोकरी की विशेष वस्तुएं...",
+    formSelectTrousseauLabel: "ट्रे पसंद (मखमली/लकड़ी)",
+    formSendWaBtn: "व्हाट्सएप पर भेजें",
+    formSuccessMsg: "व्हाट्सएप संदेश तैयार हो रहा है...",
+
+    // Contact Us / Location
+    contactBadge: "मुलाकात या कॉल करें",
+    contactTitle: "हमारे स्टूडियो से संपर्क करें",
+    contactSubtitle: "लुधियाना के मध्य में स्थित, बेहतरीन और सुंदर कलाकृतियां सिर्फ एक फोन कॉल दूर हैं।",
+    contactCardStudioTitle: "डिजाइन स्टूडियो",
+    contactCardStudioDesc: "लुधियाना मॉडल टाउन / कनाल रोड, पंजाब, भारत",
+    contactCardCallTitle: "शेफ से परामर्श करें",
+    contactCardCallDesc: "प्रतिदिन विशेष डिजाइन चर्चा के लिए उपलब्ध।",
+    contactCardHoursTitle: "स्टूडियो का समय",
+    contactCardHoursDesc: "सुबह 10:00 - रात 9:00 बजे (सोमवार - रविवार)",
+
+    // Footer
+    footerSlogan: "लुधियाना में लक्ज़री 100% अंडा-रहित केक, उपहार हैंपर्स और शादियों की शगुन पैकिंग का एकमात्र गंतव्य।",
+    footerLinksHeader: "महत्वपूर्ण लिंक्स",
+    footerContactHeader: "सीधी पूछताछ",
+    footerRights: "होम बेकर्स लुधियाना। सर्वाधिकार सुरक्षित।",
+    footerDevTag: "शाकाहारी उत्तम गुणवत्ता और अटूट विश्वास।",
+
+    itemCustomCakesTitle: "🎂 कस्टमाइज्ड केक",
+    itemCustomCakesDesc: "हमारे 100% बिना अंडे वाले केक ताजे और शुद्ध सामग्रियों से बनते हैं ताकि आपके उत्सव में चार चांद लग सकें।",
+    bulletEggless: "100% अंडा-रहित प्रमाणित",
+    bulletCustomized: "विशेष अनुकूलन सुविधा",
+    bulletFresh: "हमेशा ऑर्डर पर ताजा निर्मित",
+
+    itemGiftHampersTitle: "🎁 उपहार हैंपर्स",
+    itemGiftHampersDesc: "एक शानदार अनुभव दें! सुंदर टोकरियों में घर के बने स्वादिष्ट कुकीज़, मेवे और फूल सजाए जाते हैं।",
+    bulletWoodBasket: "सुंदर लकड़ी/मखमली टोकरियाँ",
+    bulletHandmades: "पूर्णतः हस्तनिर्मित सामग्री",
+    bulletBulkOptions: "त्योहारों व कॉर्पोरेट हेतु थोक आर्डर विकल्प",
+
+    itemReturnGiftsTitle: "🎀 रिटर्न गिफ्ट्स",
+    itemReturnGiftsDesc: "पार्टी में आए मेहमानों को विदा करते समय दी जाने वाली सुंदर और यादगार भेंट।",
+    bulletLabels: "व्यक्तिगत मुद्रित लेबल",
+    bulletChildSafe: "बच्चों हेतु सुरक्षित व स्वच्छ उत्पाद",
+    bulletBoxVariety: "विभिन्न सुंदर डिब्बे उपलब्ध",
+
+    itemTrousseauTitle: "💝 ट्रूसो पैकिंग",
+    itemTrousseauDesc: "शादी की शगुन वस्तुओं को शाही रूप दें। हमारी प्रीमियम रैपिंग हर उपहार को उत्कृष्ट बनाती है।",
+    bulletTrays: "मखमली/स्यूडे की विशेष ट्रे",
+    bulletAcrylic: "पारदर्शी एक्रिलिक व फूलों वाले कवर्स",
+    bulletBridalMatch: "दुल्हन के लहंगे से मेल खाती सुसज्जित पैकिंग"
+  },
+  ur: {
+    // Announcement & Navigation
+    announcement: "✨ لدھیانہ میں 100% بغیر انڈے کے کیک اور خصوصی پریمیم ہیمپرز ✨",
+    logoSubtitle: "لدھیانہ • قائم شدہ معیار",
+    callUs: "کال کریں",
+    waOrder: "واٹس ایپ آرڈر",
+    navHome: "ہوم",
+    navAbout: "ہمارے بارے میں",
+    navOfferings: "ہماری پیشکش",
+    navWhyUs: "ہمیں کیوں منتخب کریں",
+    navGallery: "گیلری",
+    navReviews: "تبصرے",
+    navProcess: "آرڈر کا طریقہ",
+    navContact: "رابطہ",
+    callNow: "ابھی کال کریں",
+    waInquiry: "واٹس ایپ انکوائری",
+
+    // Hero Section
+    heroBadge: "👑 لدھیانہ کا ممتاز ترین کسٹم بیکر",
+    heroTitlePart1: "لگژری اور شاندار",
+    heroTitlePart2: "100% بغیر انڈے کی تخلیقات",
+    heroSubtitle: "لدھیانہ میں خاص طور پر آپ کی پسند کے مطابق تیار کردہ خوبصورت کیک، تہواروں کے تحائف ہیمپرز اور شادیوں کی شاندار پیکیجنگ سروس۔",
+    heroBtnExplore: "ہماری پیشکش دیکھیں",
+    heroBtnInquiry: "کاشٹم کیک تیار کریں",
+    heroRatingTitle: "لدھیانہ لوکل فیملی",
+    heroRatingQuote: '"بے حد خوبصورت کیک اور لاجواب ذائقہ۔ ہماری تقریب کی جان!"',
+
+    // About Us
+    aboutBadge: "ہماری کہانی",
+    aboutTitle: "لدھیانہ میں محبت اور خوبصورت یادیں سجانا",
+    aboutText1: "سادہ اون سے لے کر لدھیانہ کی بہترین کسٹم ڈیزائنر سروس تک، ہمارا سفر معیار، 100% خالص سبزی خور پاکیزگی اور پریمیم خوبصورتی پر مبنی ہے۔",
+    aboutText2: "ہر کیک تازہ تیار کیا جاتا ہے۔ ہر گفٹ باسکٹ اور ٹرے کو نہایت نفاست سے آپ کے تھیم کے مطابق سجایا جاتا ہے جو شاہی احساس پیدا کرتی ہے۔",
+    aboutStatsYears: "سالوں کا تجربہ",
+    aboutStatsEggless: "100% خالص سبزی خور",
+    aboutStatsDesigns: "تھیم ڈیزائنز",
+    aboutQuote: '"میری بہن کی شادی کی پیکنگ میں لاجواب نفاست کا کام تھا! حقیقی آسائش۔"',
+
+    // Offerings
+    catalogBadge: "ہمارا خاص کیٹلاگ",
+    catalogTitle: "نمایاں پیشکشیں",
+    catalogSubtitle: "ہر تیاری 100% سبزی خور (بغیر انڈے کی) اور نہایت شاندار جمالیات کے ساتھ بنی ہے۔ آرڈر کے لیے کسی بھی کیٹیگری پر کلک کریں۔",
+    catalogPremiumLudhiana: "پریمیم لدھیانہ سروس",
+    catalogCustomizeBtn: "حسب ضرورت اور انکوائری",
+    catalogBrochureBtn: "واٹس ایپ بروشر",
+    catalogShareTitle: "اس کیٹلاگ آئٹم کو شیئر کریں:",
+    catalogShareCopied: "لنک کاپی ہو گیا!",
+    catalogShareCopyBtn: "لنک کاپی کریں",
+    catalogShareWaBtn: "شیئر کریں",
+
+    // Why Choose Us
+    whyBadge: "کمال کی لگن",
+    whyTitle: "خاندان ہمیں کیوں منتخب کرتے ہیں",
+    whySubtitle: "ہم صرف بیکنگ یا پیکنگ نہیں کرتے، ہم فن عیاں کرتے ہیں۔ لدھیانہ کے سب سے معزز خاندان ہمیں منتخب کرتے ہیں۔",
+    whyCard1Title: "100% خالص سبزی خور",
+    whyCard1Desc: "مکمل طور پر تصدیق شدہ بغیر انڈے کا کچن جو روایتی خاندانی اقدار کا احترام کرتا ہے۔",
+    whyCard2Title: "منفرد ڈیزائن کی کہانی",
+    whyCard2Desc: "کوئی پرانا طریقہ نہیں۔ ہم آپ کے لباس، رنگوں اور تھیم کے مطابق سب کچھ تیار کرتے ہیں۔",
+    whyCard3Title: "عمدہ ترین اشیاء",
+    whyCard3Desc: "خالص بیلجین چاکلیٹ، تازہ ونیلا بین اور خالص ڈیری کریم کا خاص استعمال۔",
+    whyCard4Title: "شاہانہ جمالیات",
+    whyCard4Desc: "مخملی ہیمپرز سے لے کر ایکریلک ٹرے تک، ہماری سجاوٹ شاہانہ پن کی علامت ہے۔",
+
+    // Gallery / Instagram
+    galleryBadge: "انسٹاگرام لائیو لک بک",
+    galleryTitle: "ہماری تصویری ڈائری",
+    gallerySubtitle: "ہمارے اسٹوڈیو سے نکلتی شاندار تخلیقات دیکھیں۔ لدھیانہ سے لائیو اپ ڈیٹس دیکھیں۔",
+    galleryLikes: "پسندیدگیاں",
+    galleryComments: "تبصرے",
+
+    // Testimonials
+    testimonialsBadge: "گاہکوں کی زبانی",
+    testimonialsTitle: "ہمارے ذائقوں کے شیدائی",
+    testimonialsSubtitle: "لدھیانہ کے ان معزز خاندانوں کے تبصرے پڑھیں جو خوشیوں کے موقع پر ہم پر اعتبار کرتے ہیں۔",
+    testimonialsNext: "اگلا",
+    testimonialsPrev: "پچھلا",
+
+    // Order Process
+    processBadge: "طریقہ کار",
+    processTitle: "آرڈر کرنے کا آسان تجربہ",
+    processSubtitle: "اپنے خوابوں کا کیک یا شگن پیکنگ حاصل کرنا نہایت آسان، واضح اور شفاف ہے۔",
+    processStep1Title: "کیٹیگری اور تفصیلات",
+    processStep1Desc: "اپنی پسندیدہ کیٹیگری اور ڈیزائن منتخب کریں۔ انکوائری کے لیے سبمیٹ کریں۔",
+    processStep2Title: "مستقیم مشاورت",
+    processStep2Desc: "ہم واٹس ایپ پر لائیو رابطہ کر کے ذائقہ، رنگوں کی تھیم اور وزن طے کرتے ہیں۔",
+    processStep3Title: "ہاتھوں سے تیاری",
+    processStep3Desc: "ہمارے اسٹوڈیو میں نفاست اور حفظان صحت کے اصولوں کے تحت آرڈر تیار کیا جاتا ہے۔",
+    processStep4Title: "محفوظ ڈلیوری اور پک اپ",
+    processStep4Desc: "ہمارے لدھیانہ اسٹوڈیو سے کیک وصول کریں یا ہوم ڈلیوری سروس کا لطف اٹھائیں۔",
+
+    // Order Form
+    formBadge: "انٹرایکٹو بلڈر",
+    formTitle: "تفصیلات درج کریں",
+    formSubtitle: "وزن، ذائقہ اور تاریخ منتخب کریں اور ہماری واٹس ایپ ٹیم کو انکوائری ڈرافٹ بھیجیں۔",
+    formCategoryLabel: "پیکج کیٹیگری",
+    formThemeLabel: "تھیم اور رنگوں کی ترجیح",
+    formThemePlaceholder: "اپنے تھیم کی وضاحت کریں، جیسے مخمل گلابی، چاکلیٹ اوورلوڈ، سنہری پیکنگ...",
+    formFlavorLabel: "ذائقہ (کیک اور کوکیز کے لیے)",
+    formWeightQtyLabel: "کیک کا وزن یا پیکیج کی تعداد",
+    formDateLabel: "مطلوبہ تاریخ",
+    formSpecialMsgLabel: "خصوصی پیغام یا پیکنگ نوٹ",
+    formSpecialMsgPlaceholder: "کیک پر لکھی جانے والی تحریر یا تحفہ ٹوکری کی خاص اشیاء...",
+    formSelectTrousseauLabel: "ٹرے کا مٹیریل (مخمل/لکڑی)",
+    formSendWaBtn: "واٹس ایپ انکوائری بھیجیں",
+    formSuccessMsg: "واٹس ایپ پیغام ڈرافٹ کیا جا رہا ہے...",
+
+    // Contact Us / Location
+    contactBadge: "رابطہ اور آمد",
+    contactTitle: "ہمارے کسٹم اسٹوڈیو سے ملیں",
+    contactSubtitle: "لدھیانہ کے قلب میں واقع، خوبصورت ترین کسٹم پیکیجنگ اور مٹھاس صرف ایک کال کی دوری پر۔",
+    contactCardStudioTitle: "ڈیزائن اسٹوڈیو",
+    contactCardStudioDesc: "لدھیانہ ماڈل ٹاؤن / کینال روڈ، پنجاب، انڈیا",
+    contactCardCallTitle: "شیف سے مشورہ کریں",
+    contactCardCallDesc: "روزانہ فون یا تفصیلی گفتگو کے لیے دستیاب۔",
+    contactCardHoursTitle: "اسٹوڈیو کے اوقات",
+    contactCardHoursDesc: "صبح 10:00 - رات 9:00 بجے (پیر تا اتوار)",
+
+    // Footer
+    footerSlogan: "لدھیانہ میں پریمیم کسٹم کیک، خوبصورت ہیمپرز اور شادیوں کی شگن پیکنگ کا واحد مرکز۔",
+    footerLinksHeader: "اہم صفحات",
+    footerContactHeader: "براہ راست رابطہ",
+    footerRights: "ہوم بیکرز لدھیانہ۔ جملہ حقوق محفوظ ہیں۔",
+    footerDevTag: "روایتی پاکیزگی اور بھروسے کا سفر۔",
+
+    itemCustomCakesTitle: "Custom Cakes 🎂",
+    itemCustomCakesDesc: "ہمارے لذیذ کسٹم کیک بالکل تازہ اور صاف ستھری اشیاء کے ساتھ تیار کیے جاتے ہیں تاکہ آپ کی خوشیوں کو چار چاند لگ سکیں۔",
+    bulletEggless: "100% بغیر انڈے کی ضمانت",
+    bulletCustomized: "مکمل حسب ضرورت تیاری",
+    bulletFresh: "تازہ ترین بیکنگ کی ضمانت",
+
+    itemGiftHampersTitle: "🎁 گفٹ ہیمپرز",
+    itemGiftHampersDesc: "ایک لاجواب تجربہ دیں! خوبصورت ٹوکریوں میں ہاتھ کے بنے بسکٹ، چاکلیٹ اور پھول سجائے جاتے ہیں۔",
+    bulletWoodBasket: "پریمیم لکڑی/مخمل کی ٹوکریاں",
+    bulletHandmades: "صرف ہینڈ میڈ مصنوعات",
+    bulletBulkOptions: "تہواروں کے لیے بلک آرڈر آپشن",
+
+    itemReturnGiftsTitle: "🎀 واپسی کے تحائف",
+    itemReturnGiftsDesc: "تقریب میں آئے مہمانوں کی واپسی پر دی جانے والی خوبصورت اور یادگار سوغات۔",
+    bulletLabels: "ذاتی کسٹم لیبلز",
+    bulletChildSafe: "بچوں کے لیے محفوظ اور پاک مصنوعات",
+    bulletBoxVariety: "مختلف خوبصورت ڈبوں کی دستیابی",
+
+    itemTrousseauTitle: "💝 ٹروسو پیکنگ",
+    itemTrousseauDesc: "شادی بیاہ کے تحائف کو شاہانہ روپ دیں۔ ہماری پریمیم پیکنگ ہر گفٹ کو شاندار بناتی ہے۔",
+    bulletTrays: "مخمل/سویڈ کی خاص ٹرے",
+    bulletAcrylic: "ایکریکلک اور پھولوں کے شاندار کور",
+    bulletBridalMatch: "دلہن کے لہنگے سے ہم آہنگ خوبصورت پیکنگ"
+  }
+};
+
+export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [language, setLanguageState] = useState<Language>(() => {
+    const saved = localStorage.getItem("homebakers_lang");
+    return (saved as Language) || "en";
+  });
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    localStorage.setItem("homebakers_lang", lang);
+  };
+
+  const t = (key: string): string => {
+    return translations[language][key] || translations["en"][key] || key;
+  };
+
+  const isRtl = language === "ur";
+
+  useEffect(() => {
+    document.documentElement.dir = isRtl ? "rtl" : "ltr";
+    document.documentElement.lang = language;
+  }, [language, isRtl]);
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t, isRtl }}>
+      <div className={isRtl ? "font-serif text-right" : "font-sans"}>
+        {children}
+      </div>
+    </LanguageContext.Provider>
+  );
+};
+
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
+  return context;
+};

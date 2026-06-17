@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Custom vibrant palette colors */
+  --color-cream-50: #FFF9F2; /* Cream baseline */
+  --color-cream-100: #FFF3E6;
+  --color-cream-200: #FFE7D1;
+  --color-cream-300: #FCE5D0;
+  --color-cream-400: #E6CEB8;
+  
+  --color-berry-50: #FFF3F4;
+  --color-berry-100: #FCE7E9; /* Light Pink */
+  --color-berry-150: #FCDCE0;
+  --color-berry-200: #FBC6CE;
+  --color-berry-250: #F9B0BF;
+  --color-berry-400: #F6B5C4;
+  --color-berry-500: #F4A7B9; /* Pink Main */
+  --color-berry-550: #E08FA2;
+  --color-berry-600: #C26C7F;
+  
+  --color-cocoa-50: #FBF9F8;
+  --color-cocoa-100: #F1E2E0;
+  --color-cocoa-110: #E7D1CD;
+  --color-cocoa-150: #D3B9B5;
+  --color-cocoa-200: #C5A7A2;
+  --color-cocoa-400: #A27E78;
+  --color-cocoa-450: #96706A;
+  --color-cocoa-600: #8C5E58; /* Chocolate Light */
+  --color-cocoa-800: #6E443C;
+  --color-cocoa-900: #4D2C20; /* Chocolate Main */
+  --color-cocoa-950: #351C14;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #FFF9F2; /* cream-50 */
+  color: #4D2C20; /* cocoa-900 */
+}
+
+/* Base utilities for premium styling */
+::selection {
+  background-color: #FCE7E9; /* berry-100 */
+  color: #4D2C20; /* cocoa-900 */
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFF3E6; /* cream-100 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8C5E58; /* cocoa-600 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6E443C; /* cocoa-800 */
+}
+
+/* Smooth fade-in and lightbox animation helpers */
+.lightbox-backdrop {
+  backdrop-filter: blur(8px);
+}
